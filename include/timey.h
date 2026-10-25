@@ -143,19 +143,29 @@ TIMEY_API void timey_query_date(char *buffer, size_t buffer_size);
   @param month_num The number of the month. This should range from 1 to 12.
   @param use_abbreviated_name Whether or not the month's name should be abbreviated.
 */
-TIMEY_API void timey_query_month_name(char *buffer, size_t buffer_size, int month_num, bool use_abbreviated_name);
+TIMEY_API void timey_query_month_name(char *buffer, size_t buffer_size, unsigned int month_num, bool use_abbreviated_name);
 /**
   Obtains the corresponding day name and inserts it into a string buffer.
 
   @note The longest possible day name is 9 characters, so the buffer
   should have a size of at least 10 to account for the null terminator.
 
+  @note This function assumes the current day, month, and year should
+  be used. For past or future dates, refer to the timestamp and datetime
+  functions.
+
   @param buffer Where the resulting day name should be placed.
   @param buffer_size The size of the buffer given.
-  @param day_num The number of the day. This should range from 1 to 7.
+  @param day_num The number of the day. This should range from 1 to 7, or 1 to 31
+  depending on the 'is_wday' argument.
+  @param is_wday Whether or not 'day_num' should be interpreted as a weekday
+  value or a month value. If this is true, then 'day_num' should range from 1 to 7
+  where 1 represents Sunday, and 7 represents Saturday. If this is false, then 'day_num'
+  should range from 1 to 31, where 1 is the first day of the month, and 31 is the last
+  possible day a month can have.
   @param use_abbreviated_name Whether or not the day's name should be abbreviated.
 */
-TIMEY_API void timey_query_day_name(char *buffer, size_t buffer_size, int day_num, bool use_abbreviated_name);
+TIMEY_API void timey_query_day_name(char *buffer, size_t buffer_size, unsigned int day_num, bool is_wday, bool use_abbreviated_name);
 
 /**
   Obtains a timestamp with the current time.
@@ -171,6 +181,19 @@ TIMEY_API timey_timestamp timey_future_timestamp(timey_timestamp *now, unsigned 
   current timestamp as the starting point.
 */
 TIMEY_API timey_timestamp timey_future_timestamp_from_now(unsigned int hours, unsigned int minutes, unsigned int seconds);
+/**
+  Creates a timestamp using a specific hour, minute, and second.
+
+  @note If this function fails, the returned timestamp object will have
+  all fields set to 0.
+
+  @important This function expects the timestamp to be within the
+  current day's current time. For past or future timestamps,
+  refer to timey_future_timestamp(...).
+
+  @see timey_future_timestamp(timey_timestamp*, unsigned int, unsigned int, unsigned int)
+*/
+TIMEY_API timey_timestamp timey_create_timestamp(unsigned int hours, unsigned int minutes, unsigned int seconds);
 
 /**
   Obtains a datetime with the current date and time.
@@ -205,3 +228,22 @@ TIMEY_API unsigned int timey_num_days_in_month(unsigned int month);
   either 29 or 28 is returned.
 */
 TIMEY_API unsigned int timey_num_days_in_month_dt(timey_datetime *dt);
+
+/**
+  Modifies a datetime object by changing its current day.
+  The other fields on the datetime will automatically
+  be updated.
+*/
+TIMEY_API void timey_set_day(timey_datetime *dt, unsigned int day_num);
+/**
+  Modifies a datetime object by changing its current month.
+  The other fields on the datetime will automatically
+  be updated.
+*/
+TIMEY_API void timey_set_month(timey_datetime *dt, unsigned int month_num);
+/**
+  Modifies a datetime object by changing its current year.
+  The other fields on the datetime will automatically
+  be updated.
+*/
+TIMEY_API void timey_set_year(timey_datetime *dt, unsigned int year_num);
