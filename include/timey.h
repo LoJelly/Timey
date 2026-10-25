@@ -111,8 +111,6 @@ typedef struct timey_datetime
 	#define TIMEY_API
 #endif
 
-// query current time and date:
-
 /**
   Obtains the current raw time in seconds since the epoch
   and inserts the time into the given timey_raw_time.
@@ -134,8 +132,18 @@ TIMEY_API void timey_query_time(char *buffer, size_t buffer_size);
   format of "mm-dd-yyyy."
 */
 TIMEY_API void timey_query_date(char *buffer, size_t buffer_size);
+/**
+  Obtains the current month name and inserts it into a string buffer.
 
-// obtaining timestamps and datetimes:
+  @note The longest possible month name is 9 characters, so the buffer
+  should have a size of at least 10 to account for the null terminator.
+
+  @param buffer Where the resulting month name should be placed.
+  @param buffer_size The size of the buffer given.
+  @param month_num The number of the month. This should range from 1 to 12.
+  @param use_abbreviated_name Whether or not the month's name should be abbreviated.
+*/
+TIMEY_API void timey_query_month_name(char *buffer, size_t buffer_size, int month_num, bool use_abbreviated_name);
 
 /**
   Obtains a timestamp with the current time.
@@ -167,9 +175,6 @@ TIMEY_API timey_datetime timey_future_datetime(timey_datetime *now, unsigned int
 */
 TIMEY_API timey_datetime timey_future_datetime_from_now(unsigned int years, unsigned int months, unsigned int days, unsigned int hours, unsigned int minutes, unsigned int seconds);
 
-
-// util-functions:
-
 /**
   Determines whether or not a year is a leap year.
 */
@@ -187,4 +192,4 @@ TIMEY_API unsigned int timey_num_days_in_month(unsigned int month);
   For February, based on if the datetime's year is leap year,
   either 29 or 28 is returned.
 */
-TIMEY_API unsigned int timey_num_days_in_dt_month(timey_datetime *dt);
+TIMEY_API unsigned int timey_num_days_in_month_dt(timey_datetime *dt);

@@ -8,7 +8,7 @@
 #define TIMEY_DATE_STR_LEN 11
 
 // obtain and format time
-static void timey_fmt_time(char *buffer, size_t size, const char *fmt)
+static void fmt_time(char *buffer, size_t size, const char *fmt)
 {
 	time_t raw = 0;
 	struct tm *time_info;
@@ -20,7 +20,7 @@ static void timey_fmt_time(char *buffer, size_t size, const char *fmt)
 	strftime(buffer, size, fmt, time_info);
 }
 // obtain full string after formatting
-static void timey_get_str(char *buffer, size_t size, const char *fmt, ...)
+static void get_fmt_str(char *buffer, size_t size, const char *fmt, ...)
 {
 	va_list args;
 	va_start(args, fmt);
@@ -45,14 +45,37 @@ void timey_query_time(char *buffer, size_t buffer_size)
 	if(!buffer)
 		return;
 
-	timey_fmt_time(buffer, buffer_size, "%H:%M:%S");
+	fmt_time(buffer, buffer_size, "%H:%M:%S");
 }
 void timey_query_date(char *buffer, size_t buffer_size)
 {
 	if(!buffer)
 		return;
 
-	timey_fmt_time(buffer, buffer_size, "%m-%d-%Y");
+	fmt_time(buffer, buffer_size, "%m-%d-%Y");
+}
+
+// array of months, where the index corresponds to the month number - 1
+static const char *const FULL_MONTH_NAMES[12] = {
+	"January", "February", "March", "April", "May", "June",
+	"July", "August", "September", "October", "November", "December"
+};
+static const char *const ABBREV_MONTH_NAMES[12] = {
+	"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+	"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+};
+void timey_query_month_name(char *buffer, size_t buffer_size, int month_num, bool use_abbreviated_name)
+{
+	if(month_num < 1 || month_num > 12 || !buffer || buffer_size == 0)
+		return;
+
+	const char *month_name = NULL;
+	if(use_abbreviated_name)
+		month_name = ABBREV_MONTH_NAMES[month_num - 1];
+	else
+		month_name = FULL_MONTH_NAMES[month_num - 1];
+
+	snprintf(buffer, buffer_size, "%s", month_name);
 }
 
 timey_timestamp timey_curr_timestamp()
@@ -90,14 +113,14 @@ timey_timestamp timey_curr_timestamp()
 
 	return ts;
 }
-static void timey_switch_ampm(timey_timestamp *ts)
+static void switch_period(timey_timestamp *ts)
 {
 	if(strcmp("AM", ts -> period) == 0)
 		strcpy(ts -> period, "PM");
 	else
 		strcpy(ts -> period, "AM");
 }
-static void timey_next_hour(timey_timestamp *ts)
+static void goto_next_hour(timey_timestamp *ts)
 {
 	ts -> min -= 60;
 	ts -> hour24 += 1;
@@ -107,7 +130,7 @@ static void timey_next_hour(timey_timestamp *ts)
 	if(ts -> hour12 > 12)
 	{
 		ts -> hour12 -= 12;
-		timey_switch_ampm(ts);
+		switch_period(ts);
 	}
 }
 timey_timestamp timey_future_timestamp(timey_timestamp *now, unsigned int hours, unsigned int minutes, unsigned int seconds)
@@ -129,14 +152,14 @@ timey_timestamp timey_future_timestamp(timey_timestamp *now, unsigned int hours,
 	while(future.hour12 > 12)
 	{
 		future.hour12 -= 12;
-		timey_switch_ampm(&future);
+		switch_period(&future);
 	}
 
 	// add minutes
 	future.min += minutes;
 	// continue to loop back an hour (60 minutes) if necessary
 	while(future.min > 60)
-		timey_next_hour(&future);
+		goto_next_hour(&future);
 
 	// add seconds
 	future.sec += seconds;
@@ -146,7 +169,7 @@ timey_timestamp timey_future_timestamp(timey_timestamp *now, unsigned int hours,
 		future.sec -= 60;
 		future.min += 1;
 		if(future.min > 60)
-			timey_next_hour(&future);
+			goto_next_hour(&future);
 	}
 
 	return future;
@@ -157,7 +180,7 @@ timey_timestamp timey_future_timestamp_from_now(unsigned int hours, unsigned int
 	return timey_future_timestamp(&now, hours, minutes, seconds);
 }
 
-static void timey_query_month_name(timey_datetime *dt)
+static void set_month_name(timey_datetime *dt)
 {
 	switch(dt -> month)
 	{
@@ -199,7 +222,7 @@ static void timey_query_month_name(timey_datetime *dt)
 			break;
 	}
 }
-static void timey_get_day_name(timey_datetime *dt, int wday)
+static void set_day_name(timey_datetime *dt, int wday)
 {
 	switch(wday)
 	{
@@ -236,7 +259,7 @@ static void timey_update_day_name(timey_datetime *dt) // -> // return 0 on failu
 	if(mktime(&time_result) == -1)
 		return;
 
-	timey_get_day_name(dt, time_result.tm_wday);
+	set_day_name(dt, time_result.tm_wday);
 }
 static void timey_query_day_name(timey_datetime *dt)
 {
@@ -249,7 +272,7 @@ static void timey_query_day_name(timey_datetime *dt)
 
 	int wday = time_info -> tm_wday; // days since Sunday (0 - 6)
 
-	timey_get_day_name(dt, wday);
+	set_day_name(dt, wday);
 }
 timey_datetime timey_curr_datetime()
 {
@@ -275,7 +298,7 @@ timey_datetime timey_curr_datetime()
 
 	dt.year = strtoul(year, NULL, 10);
 	dt.month = strtoul(month, NULL, 10);
-	timey_query_month_name(&dt);
+	set_month_name(&dt);
 	dt.day = strtoul(day, NULL, 10);
 	timey_query_day_name(&dt);
 	dt.is_leap_year = timey_is_leap_year(dt.year);
@@ -291,14 +314,14 @@ static void timey_next_year(timey_datetime *dt)
 static void timey_add_days(timey_datetime *dt, unsigned int days)
 {
 	dt -> day += days;
-	unsigned int max_month_days = timey_num_days_in_dt_month(dt);
+	unsigned int max_month_days = timey_num_days_in_month_dt(dt);
 	while(dt -> day > max_month_days)
 	{
 		dt -> day -= max_month_days;
 		dt -> month += 1;
 		if(dt -> month > 12)
 			timey_next_year(dt);
-		max_month_days = timey_num_days_in_dt_month(dt);
+		max_month_days = timey_num_days_in_month_dt(dt);
 	}
 }
 timey_datetime timey_future_datetime(timey_datetime *now, unsigned int years, unsigned int months, unsigned int days, unsigned int hours, unsigned int minutes, unsigned int seconds)
@@ -334,13 +357,13 @@ timey_datetime timey_future_datetime(timey_datetime *now, unsigned int years, un
 	ts -> hour12 += hours;
 	if(ts -> hour12 == 12)
 	{
-		timey_switch_ampm(ts);
+		switch_period(ts);
 		timey_add_days(&future, 1);
 	}
 	while(ts -> hour12 > 12)
 	{
 		ts -> hour12 -= 12;
-		timey_switch_ampm(ts);
+		switch_period(ts);
 	}
 
 	ts -> min += minutes;
@@ -357,7 +380,7 @@ timey_datetime timey_future_datetime(timey_datetime *now, unsigned int years, un
 		if(ts -> hour12 > 12)
 		{
 			ts -> hour12 -= 12;
-			timey_switch_ampm(ts);
+			switch_period(ts);
 		}
 	}
 
@@ -379,13 +402,13 @@ timey_datetime timey_future_datetime(timey_datetime *now, unsigned int years, un
 			if(ts -> hour12 > 12)
 			{
 				ts -> hour12 -= 12;
-				timey_switch_ampm(ts);
+				switch_period(ts);
 			}
 		}
 	}
 
 	// update day and month names
-	timey_query_month_name(&future);
+	set_month_name(&future);
 	timey_update_day_name(&future);
 
 	return future;
@@ -400,12 +423,12 @@ bool timey_is_leap_year(unsigned int year)
 {
 	return (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0);
 }
-static const unsigned int TIMEY_DAYS[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+static const unsigned int DAY_NUMS[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 unsigned int timey_num_days_in_month(unsigned int month)
 {
-	return TIMEY_DAYS[month - 1];
+	return DAY_NUMS[month - 1];
 }
-unsigned int timey_num_days_in_dt_month(timey_datetime *dt)
+unsigned int timey_num_days_in_month_dt(timey_datetime *dt)
 {
 	if(!dt)
 		return 0;
