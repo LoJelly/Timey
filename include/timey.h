@@ -133,7 +133,7 @@ TIMEY_API void timey_query_time(char *buffer, size_t buffer_size);
 */
 TIMEY_API void timey_query_date(char *buffer, size_t buffer_size);
 /**
-  Obtains the current month name and inserts it into a string buffer.
+  Obtains the corresponding month name and inserts it into a string buffer.
 
   @note The longest possible month name is 9 characters, so the buffer
   should have a size of at least 10 to account for the null terminator.
@@ -144,6 +144,18 @@ TIMEY_API void timey_query_date(char *buffer, size_t buffer_size);
   @param use_abbreviated_name Whether or not the month's name should be abbreviated.
 */
 TIMEY_API void timey_query_month_name(char *buffer, size_t buffer_size, int month_num, bool use_abbreviated_name);
+/**
+  Obtains the corresponding day name and inserts it into a string buffer.
+
+  @note The longest possible day name is 9 characters, so the buffer
+  should have a size of at least 10 to account for the null terminator.
+
+  @param buffer Where the resulting day name should be placed.
+  @param buffer_size The size of the buffer given.
+  @param day_num The number of the day. This should range from 1 to 7.
+  @param use_abbreviated_name Whether or not the day's name should be abbreviated.
+*/
+TIMEY_API void timey_query_day_name(char *buffer, size_t buffer_size, int day_num, bool use_abbreviated_name);
 
 /**
   Obtains a timestamp with the current time.

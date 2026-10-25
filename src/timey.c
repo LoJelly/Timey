@@ -77,6 +77,27 @@ void timey_query_month_name(char *buffer, size_t buffer_size, int month_num, boo
 
 	snprintf(buffer, buffer_size, "%s", month_name);
 }
+static const char *const FULL_DAY_NAMES[7] = {
+	"Sunday", "Monday", "Tuesday",
+	"Wednesday", "Thursday", "Friday", "Saturday"
+};
+static const char *const ABBREV_DAY_NAMES[7] = {
+	"Sun", "Mon", "Tue", "Wed",
+	"Thu", "Fri", "Sat"
+};
+void timey_query_day_name(char *buffer, size_t buffer_size, int day_num, bool use_abbreviated_name)
+{
+	if(day_num < 1 || day_num > 7 || !buffer || buffer_size == 0)
+		return;
+
+	const char *day_name = NULL;
+	if(use_abbreviated_name)
+		day_name = ABBREV_DAY_NAMES[day_num - 1];
+	else
+		day_name = FULL_DAY_NAMES[day_num - 1];
+
+	snprintf(buffer, buffer_size, "%s", day_name);
+}
 
 timey_timestamp timey_curr_timestamp()
 {
@@ -222,7 +243,7 @@ static void set_month_name(timey_datetime *dt)
 			break;
 	}
 }
-static void set_day_name(timey_datetime *dt, int wday)
+static void set_day_name_dt(timey_datetime *dt, int wday)
 {
 	switch(wday)
 	{
@@ -249,7 +270,7 @@ static void set_day_name(timey_datetime *dt, int wday)
 			break;
 	}
 }
-static void timey_update_day_name(timey_datetime *dt) // -> // return 0 on failure, 1 on success
+static void update_day_name_dt(timey_datetime *dt)
 {
 	struct tm time_result = {0};
 	time_result.tm_mday = dt -> day;
@@ -259,9 +280,9 @@ static void timey_update_day_name(timey_datetime *dt) // -> // return 0 on failu
 	if(mktime(&time_result) == -1)
 		return;
 
-	set_day_name(dt, time_result.tm_wday);
+	set_day_name_dt(dt, time_result.tm_wday);
 }
-static void timey_query_day_name(timey_datetime *dt)
+static void set_curr_day_name_dt(timey_datetime *dt)
 {
 	time_t raw = 0;
 	struct tm *time_info;
@@ -272,7 +293,7 @@ static void timey_query_day_name(timey_datetime *dt)
 
 	int wday = time_info -> tm_wday; // days since Sunday (0 - 6)
 
-	set_day_name(dt, wday);
+	set_day_name_dt(dt, wday);
 }
 timey_datetime timey_curr_datetime()
 {
@@ -300,18 +321,18 @@ timey_datetime timey_curr_datetime()
 	dt.month = strtoul(month, NULL, 10);
 	set_month_name(&dt);
 	dt.day = strtoul(day, NULL, 10);
-	timey_query_day_name(&dt);
+	set_curr_day_name_dt(&dt);
 	dt.is_leap_year = timey_is_leap_year(dt.year);
 
 	return dt;
 }
-static void timey_next_year(timey_datetime *dt)
+static void goto_next_year(timey_datetime *dt)
 {
 	dt -> month -= 12;
 	dt -> year += 1;
 	dt -> is_leap_year = timey_is_leap_year(dt -> year);
 }
-static void timey_add_days(timey_datetime *dt, unsigned int days)
+static void add_days_dt(timey_datetime *dt, unsigned int days)
 {
 	dt -> day += days;
 	unsigned int max_month_days = timey_num_days_in_month_dt(dt);
@@ -320,7 +341,7 @@ static void timey_add_days(timey_datetime *dt, unsigned int days)
 		dt -> day -= max_month_days;
 		dt -> month += 1;
 		if(dt -> month > 12)
-			timey_next_year(dt);
+			goto_next_year(dt);
 		max_month_days = timey_num_days_in_month_dt(dt);
 	}
 }
@@ -340,10 +361,10 @@ timey_datetime timey_future_datetime(timey_datetime *now, unsigned int years, un
 	future.month += months;
 	// continue to increment year if necessary
 	while(future.month > 12)
-		timey_next_year(&future);
+		goto_next_year(&future);
 
 	// add days
-	timey_add_days(&future, days);
+	add_days_dt(&future, days);
 
 	// add to timestamp (while tracking date-time components this time)
 	timey_timestamp *ts = &future.time;
@@ -352,13 +373,13 @@ timey_datetime timey_future_datetime(timey_datetime *now, unsigned int years, un
 	while(ts -> hour24 > 24)
 	{
 		ts -> hour24 -= 24;
-		timey_add_days(&future, 1);
+		add_days_dt(&future, 1);
 	}
 	ts -> hour12 += hours;
 	if(ts -> hour12 == 12)
 	{
 		switch_period(ts);
-		timey_add_days(&future, 1);
+		add_days_dt(&future, 1);
 	}
 	while(ts -> hour12 > 12)
 	{
@@ -375,7 +396,7 @@ timey_datetime timey_future_datetime(timey_datetime *now, unsigned int years, un
 		if(ts -> hour24 > 24)
 		{
 			ts -> hour24 -= 24;
-			timey_add_days(&future, 1);
+			add_days_dt(&future, 1);
 		}
 		if(ts -> hour12 > 12)
 		{
@@ -397,7 +418,7 @@ timey_datetime timey_future_datetime(timey_datetime *now, unsigned int years, un
 			if(ts -> hour24 > 24)
 			{
 				ts -> hour24 -= 24;
-				timey_add_days(&future, 1);
+				add_days_dt(&future, 1);
 			}
 			if(ts -> hour12 > 12)
 			{
@@ -409,7 +430,7 @@ timey_datetime timey_future_datetime(timey_datetime *now, unsigned int years, un
 
 	// update day and month names
 	set_month_name(&future);
-	timey_update_day_name(&future);
+	update_day_name_dt(&future);
 
 	return future;
 }
