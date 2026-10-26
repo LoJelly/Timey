@@ -108,6 +108,8 @@ void timey_query_day_name(char *buffer, size_t buffer_size, unsigned int day_num
 	{
 		timey_datetime now = timey_curr_datetime();
 		timey_set_day(&now, day_num);
+
+		day_name = now.day_name;
 	}
 
 	snprintf(buffer, buffer_size, "%s", day_name);
