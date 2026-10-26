@@ -77,17 +77,18 @@ void timey_query_month_name(char *buffer, size_t buffer_size, unsigned char mont
 
 	snprintf(buffer, buffer_size, "%s", month_name);
 }
-static const char *const FULL_DAY_NAMES[7] = {
+#define DAYS_IN_WEEK 7
+static const char *const FULL_DAY_NAMES[DAYS_IN_WEEK] = {
 	"Sunday", "Monday", "Tuesday",
 	"Wednesday", "Thursday", "Friday", "Saturday"
 };
-static const char *const ABBREV_DAY_NAMES[7] = {
+static const char *const ABBREV_DAY_NAMES[DAYS_IN_WEEK] = {
 	"Sun", "Mon", "Tue", "Wed",
 	"Thu", "Fri", "Sat"
 };
 void timey_query_day_name(char *buffer, size_t buffer_size, unsigned char day_num, bool is_wday, bool use_abbreviated_name)
 {
-	if(is_wday && (day_num < 1 || day_num > 7))
+	if(is_wday && (day_num < 1 || day_num > DAYS_IN_WEEK))
 		return;
 	if(!is_wday && (day_num < 1 || day_num > 31))
 		return;
@@ -109,7 +110,23 @@ void timey_query_day_name(char *buffer, size_t buffer_size, unsigned char day_nu
 		timey_datetime now = timey_curr_datetime();
 		timey_set_day(&now, day_num);
 
+		// now.day_name will be the full day name
 		day_name = now.day_name;
+
+		// see if the abbreviated name should be used instead
+		if(use_abbreviated_name)
+		{
+			// find matching name in the ABBREV_DAY_NAMES array
+			for(size_t i = 0; i < DAYS_IN_WEEK; ++i)
+			{
+				// when the first 3 chars match, use the name in the ABBREV_DAY_NAMES array at that index
+				if(strncmp(ABBREV_DAY_NAMES[i], day_name, 3) == 0)
+				{
+					day_name = ABBREV_DAY_NAMES[i];
+					break;
+				}
+			}
+		}
 	}
 
 	snprintf(buffer, buffer_size, "%s", day_name);
