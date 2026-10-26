@@ -5,37 +5,35 @@
 
 /**
   Holds time data (hour, minute, and second).
-
-  Each time component is an unsigned integer.
 */
 typedef struct timey_timestamp
 {
 	/**
-	  The time's hour in 24-hour format.
-	*/
-	unsigned int hour24;
-	/**
-	  The time's hour in 12-hour format.
-	*/
-	unsigned int hour12;
-	/**
-	  The time's minute.
-	*/
-	unsigned int min;
-	/**
-	  The time's second.
-	*/
-	unsigned int sec;
-	/**
 	  Either AM or PM according to the current time.
 	*/
 	char period[3];
+	/**
+	  The time's hour in 24-hour format.
+	*/
+	unsigned char hour24;
+	/**
+	  The time's hour in 12-hour format.
+	*/
+	unsigned char hour12;
+	/**
+	  The time's minute.
+	*/
+	unsigned char min;
+	/**
+	  The time's second.
+	*/
+	unsigned char sec;
 } timey_timestamp;
 
 /**
   Holds raw time data.
 
-  Raw time data is simply the number of seconds since
+  Raw time data is the number of seconds since
   the UNIX epoch (Jan 1, 1970).
 */
 typedef struct timey_raw_time
@@ -61,8 +59,6 @@ typedef struct timey_raw_time
 /**
   Holds time data (hour, minute, and second),
   as well as date information (year, month, and day).
-
-  Each component is an unsigned integer.
 */
 typedef struct timey_datetime
 {
@@ -81,21 +77,32 @@ typedef struct timey_datetime
 	/**
 	  The date's year.
 	*/
-	unsigned int year;
+	unsigned char year;
 	/**
 	  The date's month.
 	*/
-	unsigned int month;
+	unsigned char month;
 	/**
 	  The date's day.
 	*/
-	unsigned int day;
+	unsigned char day;
 	/**
 	  Whether or not the year of this date-time
 	  is a leap year.
 	*/
 	bool is_leap_year;
 } timey_datetime;
+
+/**
+  Used to track elapsed time during the program.
+*/
+typedef struct timey_stopwatch
+{
+	/**
+	  The number of elapsed seconds.
+	*/
+	unsigned long long seconds;
+} timey_stopwatch;
 
 #ifdef _WIN32
 	#ifdef TIMEY_DLL
@@ -143,7 +150,7 @@ TIMEY_API void timey_query_date(char *buffer, size_t buffer_size);
   @param month_num The number of the month. This should range from 1 to 12.
   @param use_abbreviated_name Whether or not the month's name should be abbreviated.
 */
-TIMEY_API void timey_query_month_name(char *buffer, size_t buffer_size, unsigned int month_num, bool use_abbreviated_name);
+TIMEY_API void timey_query_month_name(char *buffer, size_t buffer_size, unsigned char month_num, bool use_abbreviated_name);
 /**
   Obtains the corresponding day name and inserts it into a string buffer.
 
@@ -165,7 +172,7 @@ TIMEY_API void timey_query_month_name(char *buffer, size_t buffer_size, unsigned
   possible day a month can have.
   @param use_abbreviated_name Whether or not the day's name should be abbreviated.
 */
-TIMEY_API void timey_query_day_name(char *buffer, size_t buffer_size, unsigned int day_num, bool is_wday, bool use_abbreviated_name);
+TIMEY_API void timey_query_day_name(char *buffer, size_t buffer_size, unsigned char day_num, bool is_wday, bool use_abbreviated_name);
 
 /**
   Obtains a timestamp with the current time.
@@ -193,7 +200,7 @@ TIMEY_API timey_timestamp timey_future_timestamp_from_now(unsigned int hours, un
 
   @see timey_future_timestamp(timey_timestamp*, unsigned int, unsigned int, unsigned int)
 */
-TIMEY_API timey_timestamp timey_create_timestamp(unsigned int hours, unsigned int minutes, unsigned int seconds);
+TIMEY_API timey_timestamp timey_create_timestamp(unsigned char hours, unsigned char minutes, unsigned char seconds);
 
 /**
   Obtains a datetime with the current date and time.
@@ -218,32 +225,36 @@ TIMEY_API bool timey_is_leap_year(unsigned int year);
   Returns the number of days in a month.
 
   For February, 28 is always returned by this function.
+
+  If the given month is invalid, 0 is returned.
 */
-TIMEY_API unsigned int timey_num_days_in_month(unsigned int month);
+TIMEY_API unsigned char timey_num_days_in_month(unsigned char month);
 /**
   Returns the number of days in the given date-time's
   month.
 
   For February, based on if the datetime's year is leap year,
   either 29 or 28 is returned.
+
+  If the datetime is invalid in any way, 0 is returned.
 */
-TIMEY_API unsigned int timey_num_days_in_month_dt(timey_datetime *dt);
+TIMEY_API unsigned char timey_num_days_in_month_dt(timey_datetime *dt);
 
 /**
   Modifies a datetime object by changing its current day.
   The other fields on the datetime will automatically
   be updated.
 */
-TIMEY_API void timey_set_day(timey_datetime *dt, unsigned int day_num);
+TIMEY_API void timey_set_day(timey_datetime *dt, unsigned char day);
 /**
   Modifies a datetime object by changing its current month.
   The other fields on the datetime will automatically
   be updated.
 */
-TIMEY_API void timey_set_month(timey_datetime *dt, unsigned int month_num);
+TIMEY_API void timey_set_month(timey_datetime *dt, unsigned char month);
 /**
   Modifies a datetime object by changing its current year.
   The other fields on the datetime will automatically
   be updated.
 */
-TIMEY_API void timey_set_year(timey_datetime *dt, unsigned int year_num);
+TIMEY_API void timey_set_year(timey_datetime *dt, unsigned char year);

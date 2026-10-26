@@ -64,7 +64,7 @@ static const char *const ABBREV_MONTH_NAMES[12] = {
 	"Jan", "Feb", "Mar", "Apr", "May", "Jun",
 	"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 };
-void timey_query_month_name(char *buffer, size_t buffer_size, unsigned int month_num, bool use_abbreviated_name)
+void timey_query_month_name(char *buffer, size_t buffer_size, unsigned char month_num, bool use_abbreviated_name)
 {
 	if(month_num < 1 || month_num > 12 || !buffer || buffer_size == 0)
 		return;
@@ -85,7 +85,7 @@ static const char *const ABBREV_DAY_NAMES[7] = {
 	"Sun", "Mon", "Tue", "Wed",
 	"Thu", "Fri", "Sat"
 };
-void timey_query_day_name(char *buffer, size_t buffer_size, unsigned int day_num, bool is_wday, bool use_abbreviated_name)
+void timey_query_day_name(char *buffer, size_t buffer_size, unsigned char day_num, bool is_wday, bool use_abbreviated_name)
 {
 	if(is_wday && (day_num < 1 || day_num > 7))
 		return;
@@ -216,7 +216,7 @@ timey_timestamp timey_future_timestamp_from_now(unsigned int hours, unsigned int
 	timey_timestamp now = timey_curr_timestamp();
 	return timey_future_timestamp(&now, hours, minutes, seconds);
 }
-timey_timestamp timey_create_timestamp(unsigned int hours, unsigned int minutes, unsigned int seconds)
+timey_timestamp timey_create_timestamp(unsigned char hours, unsigned char minutes, unsigned char seconds)
 {
 	struct tm time_result = {0};
 	time_result.tm_hour = hours - 1;
@@ -484,12 +484,14 @@ bool timey_is_leap_year(unsigned int year)
 {
 	return (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0);
 }
-static const unsigned int DAY_NUMS[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-unsigned int timey_num_days_in_month(unsigned int month)
+static const unsigned char DAY_NUMS[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+unsigned char timey_num_days_in_month(unsigned char month)
 {
+	if(month < 0 || month > 11)
+		return 0;
 	return DAY_NUMS[month - 1];
 }
-unsigned int timey_num_days_in_month_dt(timey_datetime *dt)
+unsigned char timey_num_days_in_month_dt(timey_datetime *dt)
 {
 	if(!dt)
 		return 0;
@@ -504,30 +506,30 @@ unsigned int timey_num_days_in_month_dt(timey_datetime *dt)
 		return 30;
 }
 
-void timey_set_day(timey_datetime *dt, unsigned int day_num)
+void timey_set_day(timey_datetime *dt, unsigned char day)
 {
-	if(!dt || day_num < 1 || day_num > 31)
+	if(!dt || day < 1 || day > 31)
 		return;
 
-	dt->day = day_num;
+	dt->day = day;
 
 	update_datetime(dt);
 }
-void timey_set_month(timey_datetime *dt, unsigned int month_num)
+void timey_set_month(timey_datetime *dt, unsigned char month)
 {
-	if(!dt || month_num < 1 || month_num > 12)
+	if(!dt || month < 1 || month > 12)
 		return;
 
-	dt->month = month_num;
+	dt->month = month;
 
 	update_datetime(dt);
 }
-void timey_set_year(timey_datetime *dt, unsigned int year_num)
+void timey_set_year(timey_datetime *dt, unsigned char year)
 {
 	if(!dt)
 		return;
 
-	dt->year = year_num;
+	dt->year = year;
 
 	update_datetime(dt);
 }

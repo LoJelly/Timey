@@ -102,6 +102,7 @@ Classes</h2></td></tr>
 <tr class="memitem:timey_5Ftimestamp" id="r_timey_5Ftimestamp"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/de6/structtimey__timestamp.html">timey_timestamp</a></td></tr>
 <tr class="memitem:timey_5Fraw_5Ftime" id="r_timey_5Fraw_5Ftime"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d2b/structtimey__raw__time.html">timey_raw_time</a></td></tr>
 <tr class="memitem:timey_5Fdatetime" id="r_timey_5Fdatetime"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a></td></tr>
+<tr class="memitem:timey_5Fstopwatch" id="r_timey_5Fstopwatch"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d2d/structtimey__stopwatch.html">timey_stopwatch</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -112,27 +113,28 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a9206ab04940f41c4a8e1da08567cafea" id="r_a9206ab04940f41c4a8e1da08567cafea"><td class="memItemLeft" align="right" valign="top">typedef struct timey_timestamp&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9206ab04940f41c4a8e1da08567cafea">timey_timestamp</a></td></tr>
 <tr class="memitem:a54fb92a743d3215e84c496ba49a4f198" id="r_a54fb92a743d3215e84c496ba49a4f198"><td class="memItemLeft" align="right" valign="top">typedef struct timey_raw_time&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54fb92a743d3215e84c496ba49a4f198">timey_raw_time</a></td></tr>
 <tr class="memitem:a6eae5f573a97175387ca13293bf86c9a" id="r_a6eae5f573a97175387ca13293bf86c9a"><td class="memItemLeft" align="right" valign="top">typedef struct timey_datetime&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6eae5f573a97175387ca13293bf86c9a">timey_datetime</a></td></tr>
+<tr class="memitem:adf601bef9d783c28d0103feee2817fa0" id="r_adf601bef9d783c28d0103feee2817fa0"><td class="memItemLeft" align="right" valign="top">typedef struct timey_stopwatch&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf601bef9d783c28d0103feee2817fa0">timey_stopwatch</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a735ef5afc67564d3baed5fb3b3d3ebdd" id="r_a735ef5afc67564d3baed5fb3b3d3ebdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a735ef5afc67564d3baed5fb3b3d3ebdd">timey_query_raw_time</a> (<a class="el" href="../../d6/d2b/structtimey__raw__time.html">timey_raw_time</a> *t)</td></tr>
 <tr class="memitem:ac8d41a3062b3f035a8147c130ee998e4" id="r_ac8d41a3062b3f035a8147c130ee998e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8d41a3062b3f035a8147c130ee998e4">timey_query_time</a> (char *buffer, size_t buffer_size)</td></tr>
 <tr class="memitem:a3e21bc5fa46cad0363058ef7097bb04d" id="r_a3e21bc5fa46cad0363058ef7097bb04d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e21bc5fa46cad0363058ef7097bb04d">timey_query_date</a> (char *buffer, size_t buffer_size)</td></tr>
-<tr class="memitem:a2b290905d0a304b80a508c1c6928f238" id="r_a2b290905d0a304b80a508c1c6928f238"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b290905d0a304b80a508c1c6928f238">timey_query_month_name</a> (char *buffer, size_t buffer_size, unsigned int month_num, bool use_abbreviated_name)</td></tr>
-<tr class="memitem:a0b5fcf7e8ee3166f999b250565d55797" id="r_a0b5fcf7e8ee3166f999b250565d55797"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b5fcf7e8ee3166f999b250565d55797">timey_query_day_name</a> (char *buffer, size_t buffer_size, unsigned int day_num, bool is_wday, bool use_abbreviated_name)</td></tr>
+<tr class="memitem:ac4bc69bf3559958233fecb896839b61e" id="r_ac4bc69bf3559958233fecb896839b61e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4bc69bf3559958233fecb896839b61e">timey_query_month_name</a> (char *buffer, size_t buffer_size, unsigned char month_num, bool use_abbreviated_name)</td></tr>
+<tr class="memitem:a29294376e4f56c71affb24765cf39bb7" id="r_a29294376e4f56c71affb24765cf39bb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29294376e4f56c71affb24765cf39bb7">timey_query_day_name</a> (char *buffer, size_t buffer_size, unsigned char day_num, bool is_wday, bool use_abbreviated_name)</td></tr>
 <tr class="memitem:aaadca3a2da71a7f3c33821a41e672446" id="r_aaadca3a2da71a7f3c33821a41e672446"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> <a class="el" href="../../de/de6/structtimey__timestamp.html">timey_timestamp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaadca3a2da71a7f3c33821a41e672446">timey_curr_timestamp</a> (void)</td></tr>
 <tr class="memitem:a18f806fe96b03068178f5a50998669c4" id="r_a18f806fe96b03068178f5a50998669c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> <a class="el" href="../../de/de6/structtimey__timestamp.html">timey_timestamp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18f806fe96b03068178f5a50998669c4">timey_future_timestamp</a> (<a class="el" href="../../de/de6/structtimey__timestamp.html">timey_timestamp</a> *now, unsigned int hours, unsigned int minutes, unsigned int seconds)</td></tr>
 <tr class="memitem:af1f663f3d8ac8e191cba90288a29dbca" id="r_af1f663f3d8ac8e191cba90288a29dbca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> <a class="el" href="../../de/de6/structtimey__timestamp.html">timey_timestamp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1f663f3d8ac8e191cba90288a29dbca">timey_future_timestamp_from_now</a> (unsigned int hours, unsigned int minutes, unsigned int seconds)</td></tr>
-<tr class="memitem:adf9f74eda18dc94f21914139c66b2aa0" id="r_adf9f74eda18dc94f21914139c66b2aa0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> <a class="el" href="../../de/de6/structtimey__timestamp.html">timey_timestamp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf9f74eda18dc94f21914139c66b2aa0">timey_create_timestamp</a> (unsigned int hours, unsigned int minutes, unsigned int seconds)</td></tr>
+<tr class="memitem:abf47b701b57507229c2394e1bfcd9768" id="r_abf47b701b57507229c2394e1bfcd9768"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> <a class="el" href="../../de/de6/structtimey__timestamp.html">timey_timestamp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf47b701b57507229c2394e1bfcd9768">timey_create_timestamp</a> (unsigned char hours, unsigned char minutes, unsigned char seconds)</td></tr>
 <tr class="memitem:a02a8b9052f142212fdacb6fb6c213268" id="r_a02a8b9052f142212fdacb6fb6c213268"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> <a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02a8b9052f142212fdacb6fb6c213268">timey_curr_datetime</a> (void)</td></tr>
 <tr class="memitem:aa32397f217e3c67d28b48aae97c58a35" id="r_aa32397f217e3c67d28b48aae97c58a35"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> <a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa32397f217e3c67d28b48aae97c58a35">timey_future_datetime</a> (<a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a> *now, unsigned int years, unsigned int months, unsigned int days, unsigned int hours, unsigned int minutes, unsigned int seconds)</td></tr>
 <tr class="memitem:acdd55c924896593777a4fcef67b741b1" id="r_acdd55c924896593777a4fcef67b741b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> <a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acdd55c924896593777a4fcef67b741b1">timey_future_datetime_from_now</a> (unsigned int years, unsigned int months, unsigned int days, unsigned int hours, unsigned int minutes, unsigned int seconds)</td></tr>
 <tr class="memitem:a41366d8323910c01dd61e3d206e309ef" id="r_a41366d8323910c01dd61e3d206e309ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a41366d8323910c01dd61e3d206e309ef">timey_is_leap_year</a> (unsigned int year)</td></tr>
-<tr class="memitem:ae445ff0254162a2a48dd925590e3cf2c" id="r_ae445ff0254162a2a48dd925590e3cf2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae445ff0254162a2a48dd925590e3cf2c">timey_num_days_in_month</a> (unsigned int month)</td></tr>
-<tr class="memitem:a98565cd371bd31e5d3b61112f0ea0a06" id="r_a98565cd371bd31e5d3b61112f0ea0a06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a98565cd371bd31e5d3b61112f0ea0a06">timey_num_days_in_month_dt</a> (<a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a> *dt)</td></tr>
-<tr class="memitem:ac7f1573ec07cca5b16ec3ba1963b874b" id="r_ac7f1573ec07cca5b16ec3ba1963b874b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7f1573ec07cca5b16ec3ba1963b874b">timey_set_day</a> (<a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a> *dt, unsigned int day_num)</td></tr>
-<tr class="memitem:ad3130d472c82eb00841473eb0b203910" id="r_ad3130d472c82eb00841473eb0b203910"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3130d472c82eb00841473eb0b203910">timey_set_month</a> (<a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a> *dt, unsigned int month_num)</td></tr>
-<tr class="memitem:ac036e508ed788e1e8478aa61875462b1" id="r_ac036e508ed788e1e8478aa61875462b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac036e508ed788e1e8478aa61875462b1">timey_set_year</a> (<a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a> *dt, unsigned int year_num)</td></tr>
+<tr class="memitem:a9aaf15c76de7c09436eba7d4335aab15" id="r_a9aaf15c76de7c09436eba7d4335aab15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9aaf15c76de7c09436eba7d4335aab15">timey_num_days_in_month</a> (unsigned char month)</td></tr>
+<tr class="memitem:a53714566d709464f087604258e35a8a7" id="r_a53714566d709464f087604258e35a8a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53714566d709464f087604258e35a8a7">timey_num_days_in_month_dt</a> (<a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a> *dt)</td></tr>
+<tr class="memitem:acc9ba1b9664aeb8af7c16224e4c38629" id="r_acc9ba1b9664aeb8af7c16224e4c38629"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc9ba1b9664aeb8af7c16224e4c38629">timey_set_day</a> (<a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a> *dt, unsigned char day)</td></tr>
+<tr class="memitem:a2aaef2916b138233e709eb5bb4f0f4ad" id="r_a2aaef2916b138233e709eb5bb4f0f4ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2aaef2916b138233e709eb5bb4f0f4ad">timey_set_month</a> (<a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a> *dt, unsigned char month)</td></tr>
+<tr class="memitem:aa36d4d6ba35e711bc311b0c6cc0427a4" id="r_aa36d4d6ba35e711bc311b0c6cc0427a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa36d4d6ba35e711bc311b0c6cc0427a4">timey_set_year</a> (<a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a> *dt, unsigned char year)</td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="acfe8f6b568b67bb54ef5650a89639b8a" name="acfe8f6b568b67bb54ef5650a89639b8a"></a>
@@ -147,9 +149,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">111</a> of file <a class="el" href="../../d8/d05/timey_8h_source.html">timey.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">118</a> of file <a class="el" href="../../d8/d05/timey_8h_source.html">timey.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#adf9f74eda18dc94f21914139c66b2aa0">timey_create_timestamp()</a>, <a class="el" href="#a02a8b9052f142212fdacb6fb6c213268">timey_curr_datetime()</a>, <a class="el" href="#aaadca3a2da71a7f3c33821a41e672446">timey_curr_timestamp()</a>, <a class="el" href="#aa32397f217e3c67d28b48aae97c58a35">timey_future_datetime()</a>, <a class="el" href="#acdd55c924896593777a4fcef67b741b1">timey_future_datetime_from_now()</a>, <a class="el" href="#a18f806fe96b03068178f5a50998669c4">timey_future_timestamp()</a>, <a class="el" href="#af1f663f3d8ac8e191cba90288a29dbca">timey_future_timestamp_from_now()</a>, <a class="el" href="#a41366d8323910c01dd61e3d206e309ef">timey_is_leap_year()</a>, <a class="el" href="#ae445ff0254162a2a48dd925590e3cf2c">timey_num_days_in_month()</a>, <a class="el" href="#a98565cd371bd31e5d3b61112f0ea0a06">timey_num_days_in_month_dt()</a>, <a class="el" href="#a3e21bc5fa46cad0363058ef7097bb04d">timey_query_date()</a>, <a class="el" href="#a0b5fcf7e8ee3166f999b250565d55797">timey_query_day_name()</a>, <a class="el" href="#a2b290905d0a304b80a508c1c6928f238">timey_query_month_name()</a>, <a class="el" href="#a735ef5afc67564d3baed5fb3b3d3ebdd">timey_query_raw_time()</a>, <a class="el" href="#ac8d41a3062b3f035a8147c130ee998e4">timey_query_time()</a>, <a class="el" href="#ac7f1573ec07cca5b16ec3ba1963b874b">timey_set_day()</a>, <a class="el" href="#ad3130d472c82eb00841473eb0b203910">timey_set_month()</a>, and <a class="el" href="#ac036e508ed788e1e8478aa61875462b1">timey_set_year()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="#abf47b701b57507229c2394e1bfcd9768">timey_create_timestamp()</a>, <a class="el" href="#a02a8b9052f142212fdacb6fb6c213268">timey_curr_datetime()</a>, <a class="el" href="#aaadca3a2da71a7f3c33821a41e672446">timey_curr_timestamp()</a>, <a class="el" href="#aa32397f217e3c67d28b48aae97c58a35">timey_future_datetime()</a>, <a class="el" href="#acdd55c924896593777a4fcef67b741b1">timey_future_datetime_from_now()</a>, <a class="el" href="#a18f806fe96b03068178f5a50998669c4">timey_future_timestamp()</a>, <a class="el" href="#af1f663f3d8ac8e191cba90288a29dbca">timey_future_timestamp_from_now()</a>, <a class="el" href="#a41366d8323910c01dd61e3d206e309ef">timey_is_leap_year()</a>, <a class="el" href="#a9aaf15c76de7c09436eba7d4335aab15">timey_num_days_in_month()</a>, <a class="el" href="#a53714566d709464f087604258e35a8a7">timey_num_days_in_month_dt()</a>, <a class="el" href="#a3e21bc5fa46cad0363058ef7097bb04d">timey_query_date()</a>, <a class="el" href="#a29294376e4f56c71affb24765cf39bb7">timey_query_day_name()</a>, <a class="el" href="#ac4bc69bf3559958233fecb896839b61e">timey_query_month_name()</a>, <a class="el" href="#a735ef5afc67564d3baed5fb3b3d3ebdd">timey_query_raw_time()</a>, <a class="el" href="#ac8d41a3062b3f035a8147c130ee998e4">timey_query_time()</a>, <a class="el" href="#acc9ba1b9664aeb8af7c16224e4c38629">timey_set_day()</a>, <a class="el" href="#a2aaef2916b138233e709eb5bb4f0f4ad">timey_set_month()</a>, and <a class="el" href="#aa36d4d6ba35e711bc311b0c6cc0427a4">timey_set_year()</a>.</p>
 
 </div>
 </div>
@@ -165,8 +167,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Holds time data (hour, minute, and second), as well as date information (year, month, and day).</p>
-<p>Each component is an unsigned integer. </p>
+<p>Holds time data (hour, minute, and second), as well as date information (year, month, and day). </p>
 
 </div>
 </div>
@@ -182,7 +183,22 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Holds raw time data.</p>
-<p>Raw time data is simply the number of seconds since the UNIX epoch (Jan 1, 1970). </p>
+<p>Raw time data is the number of seconds since the UNIX epoch (Jan 1, 1970). </p>
+
+</div>
+</div>
+<a id="adf601bef9d783c28d0103feee2817fa0" name="adf601bef9d783c28d0103feee2817fa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf601bef9d783c28d0103feee2817fa0">&#9670;&#160;</a></span>timey_stopwatch</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct timey_stopwatch timey_stopwatch</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Used to track elapsed time during the program. </p>
 
 </div>
 </div>
@@ -197,14 +213,13 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Holds time data (hour, minute, and second).</p>
-<p>Each time component is an unsigned integer. </p>
+<p>Holds time data (hour, minute, and second). </p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="adf9f74eda18dc94f21914139c66b2aa0" name="adf9f74eda18dc94f21914139c66b2aa0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf9f74eda18dc94f21914139c66b2aa0">&#9670;&#160;</a></span>timey_create_timestamp()</h2>
+<a id="abf47b701b57507229c2394e1bfcd9768" name="abf47b701b57507229c2394e1bfcd9768"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf47b701b57507229c2394e1bfcd9768">&#9670;&#160;</a></span>timey_create_timestamp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -212,17 +227,17 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> <a class="el" href="../../de/de6/structtimey__timestamp.html">timey_timestamp</a> timey_create_timestamp </td>
           <td>(</td>
-          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>hours</em></span>, </td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>hours</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>minutes</em></span>, </td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>minutes</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>seconds</em></span>&#160;)</td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>seconds</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -231,7 +246,7 @@ Functions</h2></td></tr>
 <dl class="section important"><dt>Important</dt><dd>This function expects the timestamp to be within the current day's current time. For past or future timestamps, refer to timey_future_timestamp(...).</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a18f806fe96b03068178f5a50998669c4">timey_future_timestamp(timey_timestamp*, unsigned int, unsigned int, unsigned int)</a> </dd></dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -251,7 +266,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Obtains a datetime with the current date and time. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -271,7 +286,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Obtains a timestamp with the current time. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -320,7 +335,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Obtains a datetime in the future using another datetime as a starting point. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -364,7 +379,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Obtains a datetime in the future using the current datetime as the starting point. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -398,7 +413,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Obtains a timestamp in the future using another timestamp as a starting point. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -427,7 +442,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Obtains a timestamp in the future using the current timestamp as the starting point. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -447,39 +462,40 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Determines whether or not a year is a leap year. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
-<a id="ae445ff0254162a2a48dd925590e3cf2c" name="ae445ff0254162a2a48dd925590e3cf2c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae445ff0254162a2a48dd925590e3cf2c">&#9670;&#160;</a></span>timey_num_days_in_month()</h2>
+<a id="a9aaf15c76de7c09436eba7d4335aab15" name="a9aaf15c76de7c09436eba7d4335aab15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9aaf15c76de7c09436eba7d4335aab15">&#9670;&#160;</a></span>timey_num_days_in_month()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> unsigned int timey_num_days_in_month </td>
+          <td class="memname"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> unsigned char timey_num_days_in_month </td>
           <td>(</td>
-          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>month</em></span></td><td>)</td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>month</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Returns the number of days in a month.</p>
-<p>For February, 28 is always returned by this function. </p>
+<p>For February, 28 is always returned by this function.</p>
+<p>If the given month is invalid, 0 is returned. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
-<a id="a98565cd371bd31e5d3b61112f0ea0a06" name="a98565cd371bd31e5d3b61112f0ea0a06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98565cd371bd31e5d3b61112f0ea0a06">&#9670;&#160;</a></span>timey_num_days_in_month_dt()</h2>
+<a id="a53714566d709464f087604258e35a8a7" name="a53714566d709464f087604258e35a8a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53714566d709464f087604258e35a8a7">&#9670;&#160;</a></span>timey_num_days_in_month_dt()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> unsigned int timey_num_days_in_month_dt </td>
+          <td class="memname"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> unsigned char timey_num_days_in_month_dt </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a> *</td>          <td class="paramname"><span class="paramname"><em>dt</em></span></td><td>)</td>
           <td></td>
@@ -487,9 +503,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Returns the number of days in the given date-time's month.</p>
-<p>For February, based on if the datetime's year is leap year, either 29 or 28 is returned. </p>
+<p>For February, based on if the datetime's year is leap year, either 29 or 28 is returned.</p>
+<p>If the datetime is invalid in any way, 0 is returned. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -514,12 +531,12 @@ Functions</h2></td></tr>
 <p>Obtains the current date and inserts it into a string buffer.</p>
 <dl class="section note"><dt>Note</dt><dd>For the buffer to hold the full date, the buffer must have a size of at least 11 bytes. The buffer will be in the format of "mm-dd-yyyy." </dd></dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
-<a id="a0b5fcf7e8ee3166f999b250565d55797" name="a0b5fcf7e8ee3166f999b250565d55797"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b5fcf7e8ee3166f999b250565d55797">&#9670;&#160;</a></span>timey_query_day_name()</h2>
+<a id="a29294376e4f56c71affb24765cf39bb7" name="a29294376e4f56c71affb24765cf39bb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29294376e4f56c71affb24765cf39bb7">&#9670;&#160;</a></span>timey_query_day_name()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -537,7 +554,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>day_num</em></span>, </td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>day_num</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -566,12 +583,12 @@ This function assumes the current day, month, and year should be used. For past 
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
-<a id="a2b290905d0a304b80a508c1c6928f238" name="a2b290905d0a304b80a508c1c6928f238"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b290905d0a304b80a508c1c6928f238">&#9670;&#160;</a></span>timey_query_month_name()</h2>
+<a id="ac4bc69bf3559958233fecb896839b61e" name="ac4bc69bf3559958233fecb896839b61e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4bc69bf3559958233fecb896839b61e">&#9670;&#160;</a></span>timey_query_month_name()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -589,7 +606,7 @@ This function assumes the current day, month, and year should be used. For past 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>month_num</em></span>, </td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>month_num</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -610,7 +627,7 @@ This function assumes the current day, month, and year should be used. For past 
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -630,7 +647,7 @@ This function assumes the current day, month, and year should be used. For past 
 </div><div class="memdoc">
 <p>Obtains the current raw time in seconds since the epoch and inserts the time into the given <a class="el" href="../../d6/d2b/structtimey__raw__time.html">timey_raw_time</a>. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -655,12 +672,12 @@ This function assumes the current day, month, and year should be used. For past 
 <p>Obtains the current time and inserts it into a string buffer.</p>
 <dl class="section note"><dt>Note</dt><dd>For the buffer to hold the full time, the buffer must have a size of at least 9 bytes. The buffer will be in the format of "hh:mm:ss." </dd></dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
-<a id="ac7f1573ec07cca5b16ec3ba1963b874b" name="ac7f1573ec07cca5b16ec3ba1963b874b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7f1573ec07cca5b16ec3ba1963b874b">&#9670;&#160;</a></span>timey_set_day()</h2>
+<a id="acc9ba1b9664aeb8af7c16224e4c38629" name="acc9ba1b9664aeb8af7c16224e4c38629"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc9ba1b9664aeb8af7c16224e4c38629">&#9670;&#160;</a></span>timey_set_day()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -673,18 +690,18 @@ This function assumes the current day, month, and year should be used. For past 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>day_num</em></span>&#160;)</td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>day</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Modifies a datetime object by changing its current day. The other fields on the datetime will automatically be updated. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
-<a id="ad3130d472c82eb00841473eb0b203910" name="ad3130d472c82eb00841473eb0b203910"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3130d472c82eb00841473eb0b203910">&#9670;&#160;</a></span>timey_set_month()</h2>
+<a id="a2aaef2916b138233e709eb5bb4f0f4ad" name="a2aaef2916b138233e709eb5bb4f0f4ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2aaef2916b138233e709eb5bb4f0f4ad">&#9670;&#160;</a></span>timey_set_month()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -697,18 +714,18 @@ This function assumes the current day, month, and year should be used. For past 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>month_num</em></span>&#160;)</td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>month</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Modifies a datetime object by changing its current month. The other fields on the datetime will automatically be updated. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
-<a id="ac036e508ed788e1e8478aa61875462b1" name="ac036e508ed788e1e8478aa61875462b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac036e508ed788e1e8478aa61875462b1">&#9670;&#160;</a></span>timey_set_year()</h2>
+<a id="aa36d4d6ba35e711bc311b0c6cc0427a4" name="aa36d4d6ba35e711bc311b0c6cc0427a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa36d4d6ba35e711bc311b0c6cc0427a4">&#9670;&#160;</a></span>timey_set_year()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -721,13 +738,13 @@ This function assumes the current day, month, and year should be used. For past 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>year_num</em></span>&#160;)</td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>year</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Modifies a datetime object by changing its current year. The other fields on the datetime will automatically be updated. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00111">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">TIMEY_API</a>.</p>
 
 </div>
 </div>
