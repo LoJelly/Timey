@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['period_0',['period',['../de/de6/structtimey__timestamp.html#a85ff737da9d8fec7679f800c3d2331d9',1,'timey_timestamp']]]
+  ['nanosec_0',['nanosec',['../d6/d2b/structtimey__raw__time.html#aa322db1649e0d700d060467fb50902d5',1,'timey_raw_time']]]
 ];

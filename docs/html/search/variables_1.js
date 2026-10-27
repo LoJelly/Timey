@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hour12_0',['hour12',['../de/de6/structtimey__timestamp.html#a101535fc6844ef29b763f37278cd0ff5',1,'timey_timestamp']]],
-  ['hour24_1',['hour24',['../de/de6/structtimey__timestamp.html#a46f956dd0aeac60483ae6612e16bb330',1,'timey_timestamp']]]
+  ['end_5ftime_0',['end_time',['../d7/d2d/structtimey__stopwatch.html#a5231a2af35987313ba4f46e51d7ea74b',1,'timey_stopwatch']]],
+  ['end_5ftime_5freached_1',['end_time_reached',['../d7/d2d/structtimey__stopwatch.html#a5d711981fd2eaef36661c4cddcf97b99',1,'timey_stopwatch']]]
 ];

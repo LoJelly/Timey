@@ -101,7 +101,32 @@ typedef struct timey_stopwatch
 	/**
 	  The number of elapsed seconds.
 	*/
-	unsigned long long seconds;
+	long double seconds;
+	/**
+	  The timestamp when the stopwatch was started.
+	*/
+	timey_timestamp start_time;
+	/**
+	  A target timestamp for when the stopwatch
+	  should automatically stop.
+
+	  @note Default stopwatches do not use this
+	  timestamp. You must manually set this
+	  timestamp if you want the stopwatch
+	  to automatically stop at a target time.
+	*/
+	timey_timestamp end_time;
+	/**
+	  Whether or not the stopwatch is paused.
+	*/
+	bool paused;
+	/**
+	  Whether or not the stopwatch has reached
+	  its target end time.
+
+	  @see end_time
+	*/
+	bool end_time_reached;
 } timey_stopwatch;
 
 #ifdef _WIN32
@@ -182,7 +207,7 @@ TIMEY_API timey_timestamp timey_curr_timestamp(void);
   Obtains a timestamp in the future using another
   timestamp as a starting point.
 */
-TIMEY_API timey_timestamp timey_future_timestamp(timey_timestamp *now, unsigned int hours, unsigned int minutes, unsigned int seconds);
+TIMEY_API timey_timestamp timey_future_timestamp(const timey_timestamp *now, unsigned int hours, unsigned int minutes, unsigned int seconds);
 /**
   Obtains a timestamp in the future using the
   current timestamp as the starting point.
@@ -210,7 +235,7 @@ TIMEY_API timey_datetime timey_curr_datetime(void);
   Obtains a datetime in the future using another
   datetime as a starting point.
 */
-TIMEY_API timey_datetime timey_future_datetime(timey_datetime *now, unsigned int years, unsigned int months, unsigned int days, unsigned int hours, unsigned int minutes, unsigned int seconds);
+TIMEY_API timey_datetime timey_future_datetime(const timey_datetime *now, unsigned int years, unsigned int months, unsigned int days, unsigned int hours, unsigned int minutes, unsigned int seconds);
 /**
   Obtains a datetime in the future using the current
   datetime as the starting point.
@@ -238,7 +263,7 @@ TIMEY_API unsigned char timey_num_days_in_month(unsigned char month);
 
   If the datetime is invalid in any way, 0 is returned.
 */
-TIMEY_API unsigned char timey_num_days_in_month_dt(timey_datetime *dt);
+TIMEY_API unsigned char timey_num_days_in_month_dt(const timey_datetime *dt);
 
 /**
   Modifies a datetime object by changing its current day.
@@ -258,3 +283,55 @@ TIMEY_API void timey_set_month(timey_datetime *dt, unsigned char month);
   be updated.
 */
 TIMEY_API void timey_set_year(timey_datetime *dt, unsigned char year);
+
+/**
+  Determines if two timestamps are equal.
+*/
+TIMEY_API bool timey_timestamps_are_equal(const timey_timestamp *ts1, const timey_timestamp *ts2);
+/**
+  Determines if two datetimes are equal.
+*/
+TIMEY_API bool timey_datetimes_are_equal(const timey_datetime *dt1, const timey_datetime *dt2);
+
+/**
+  Creates a stopwatch.
+*/
+TIMEY_API timey_stopwatch timey_new_stopwatch(void);
+/**
+  Starts a stopwatch.
+*/
+TIMEY_API void timey_start_stopwatch(timey_stopwatch *ts);
+/**
+  Pauses a stopwatch.
+
+  Pausing a stopwatch does not reset
+  the amount of elapsed seconds the stopwatch
+  has currently tracked.
+*/
+TIMEY_API void timey_pause_stopwatch(timey_stopwatch *ts);
+/**
+  Resets a stopwatch.
+
+  Resetting a stopwatch results in its
+  elapsed seconds being reset to 0,
+  and its 'start_time' timestamp being reset
+  as well.
+
+  @note This function also resets the 'end_time'
+  timestamp on the stopwatch.
+*/
+TIMEY_API void timey_reset_stopwatch(timey_stopwatch *ts);
+/**
+  Updates a stopwatch.
+
+  Use this function in the program's main loop
+  using the delta time value to update the
+  stopwatch's time.
+
+  @note If the stopwatch is using a target end time,
+  this function automatically checks to see if
+  the end time has been reached, and if it has,
+  the stopwatch is paused, and the 'end_time_reached'
+  field on the stopwatch will be true.
+*/
+TIMEY_API void timey_update_stopwatch(timey_stopwatch *ts, long double delta_time);

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['is_5fleap_5fyear_0',['is_leap_year',['../da/db9/structtimey__datetime.html#a95286ffb7e6f942061072523a9cc4899',1,'timey_datetime']]]
+  ['hour12_0',['hour12',['../de/de6/structtimey__timestamp.html#a101535fc6844ef29b763f37278cd0ff5',1,'timey_timestamp']]],
+  ['hour24_1',['hour24',['../de/de6/structtimey__timestamp.html#a46f956dd0aeac60483ae6612e16bb330',1,'timey_timestamp']]]
 ];

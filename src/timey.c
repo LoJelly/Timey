@@ -187,7 +187,7 @@ static void goto_next_hour(timey_timestamp *ts)
 		switch_period(ts);
 	}
 }
-timey_timestamp timey_future_timestamp(timey_timestamp *now, unsigned int hours, unsigned int minutes, unsigned int seconds)
+timey_timestamp timey_future_timestamp(const timey_timestamp *now, unsigned int hours, unsigned int minutes, unsigned int seconds)
 {
 	timey_timestamp future = {0};
 
@@ -258,7 +258,7 @@ timey_timestamp timey_create_timestamp(unsigned char hours, unsigned char minute
 	return ts;
 }
 
-static void set_month_name(timey_datetime *dt)
+static void set_month_name_dt(timey_datetime *dt)
 {
 	switch(dt->month)
 	{
@@ -327,18 +327,6 @@ static void set_day_name_dt(timey_datetime *dt, int wday)
 			break;
 	}
 }
-static void update_datetime(timey_datetime *dt)
-{
-	struct tm time_result = {0};
-	time_result.tm_mday = dt->day;
-	time_result.tm_mon = dt->month - 1;
-	time_result.tm_year = dt->year - 1900;
-
-	if(mktime(&time_result) == -1)
-		return;
-
-	set_day_name_dt(dt, time_result.tm_wday);
-}
 static void set_curr_day_name_dt(timey_datetime *dt)
 {
 	time_t raw = 0;
@@ -351,6 +339,18 @@ static void set_curr_day_name_dt(timey_datetime *dt)
 	int wday = time_info->tm_wday; // days since Sunday (0 - 6)
 
 	set_day_name_dt(dt, wday);
+}
+static void update_datetime(timey_datetime *dt)
+{
+	struct tm time_result = {0};
+	time_result.tm_mday = dt->day;
+	time_result.tm_mon = dt->month - 1;
+	time_result.tm_year = dt->year - 1900;
+
+	if(mktime(&time_result) == -1)
+		return;
+
+	set_day_name_dt(dt, time_result.tm_wday);
 }
 timey_datetime timey_curr_datetime()
 {
@@ -376,7 +376,7 @@ timey_datetime timey_curr_datetime()
 
 	dt.year = strtoul(year, NULL, 10);
 	dt.month = strtoul(month, NULL, 10);
-	set_month_name(&dt);
+	set_month_name_dt(&dt);
 	dt.day = strtoul(day, NULL, 10);
 	set_curr_day_name_dt(&dt);
 	dt.is_leap_year = timey_is_leap_year(dt.year);
@@ -402,7 +402,7 @@ static void add_days_dt(timey_datetime *dt, unsigned int days)
 		max_month_days = timey_num_days_in_month_dt(dt);
 	}
 }
-timey_datetime timey_future_datetime(timey_datetime *now, unsigned int years, unsigned int months, unsigned int days, unsigned int hours, unsigned int minutes, unsigned int seconds)
+timey_datetime timey_future_datetime(const timey_datetime *now, unsigned int years, unsigned int months, unsigned int days, unsigned int hours, unsigned int minutes, unsigned int seconds)
 {
 	timey_datetime future = {0};
 
@@ -486,7 +486,7 @@ timey_datetime timey_future_datetime(timey_datetime *now, unsigned int years, un
 	}
 
 	// update day and month names
-	set_month_name(&future);
+	set_month_name_dt(&future);
 	update_datetime(&future);
 
 	return future;
@@ -508,7 +508,7 @@ unsigned char timey_num_days_in_month(unsigned char month)
 		return 0;
 	return DAY_NUMS[month - 1];
 }
-unsigned char timey_num_days_in_month_dt(timey_datetime *dt)
+unsigned char timey_num_days_in_month_dt(const timey_datetime *dt)
 {
 	if(!dt)
 		return 0;
@@ -550,3 +550,91 @@ void timey_set_year(timey_datetime *dt, unsigned char year)
 
 	update_datetime(dt);
 }
+
+bool timey_timestamps_are_equal(const timey_timestamp *ts1, const timey_timestamp *ts2)
+{
+	if(!ts1 || !ts2)
+		return false;
+
+	// if same pointer, they are equal by default
+	if(ts1 == ts2)
+		return true;
+
+	// check each field on both timestamps:
+	return strcmp(ts1->period, ts2->period) == 0 && ts1->hour24 == ts2->hour24 &&
+		ts1->hour12 == ts2->hour12 && ts1->min == ts2->min && ts1->sec == ts2->sec;
+}
+bool timey_datetimes_are_equal(const timey_datetime *dt1, const timey_datetime *dt2)
+{
+	if(!dt1 || !dt2)
+		return false;
+
+	// if same pointer, they are equal by default
+	if(dt1 == dt2)
+		return true;
+
+	// check each field on both datetimes:
+	return timey_timestamps_are_equal(&dt1->time, &dt2->time) &&
+		strcmp(dt1->month_name, dt2->month_name) == 0 &&
+		strcmp(dt1->day_name, dt2->day_name) == 0 &&
+		dt1->year == dt2->year && dt1->month == dt2->month &&
+		dt1->day == dt2->day && dt1->is_leap_year == dt2->is_leap_year;
+}
+
+timey_stopwatch timey_new_stopwatch()
+{
+	timey_stopwatch ts = {0};
+	timey_reset_stopwatch(&ts);
+	return ts;
+}
+void timey_start_stopwatch(timey_stopwatch *ts)
+{
+	if(!ts)
+		return;
+	ts->paused = false;
+
+	// the start time of the stopwatch is the current time
+	ts->start_time = timey_curr_timestamp();
+
+	ts->end_time_reached = false;
+}
+void timey_pause_stopwatch(timey_stopwatch *ts)
+{
+	if(!ts)
+		return;
+	ts->paused = true;
+}
+void timey_reset_stopwatch(timey_stopwatch *ts)
+{
+	if(!ts)
+		return;
+	ts->paused = true;
+	ts->seconds = 0;
+	ts->start_time = (timey_timestamp) {0};
+	ts->end_time = (timey_timestamp) {0};
+	ts->end_time_reached = false;
+}
+void timey_update_stopwatch(timey_stopwatch *ts, long double delta_time)
+{
+	if(!ts || ts->paused)
+		return;
+	ts->seconds += delta_time;
+
+	// see if stopwatch is using a target time (must be a valid timestamp)
+	if(ts->end_time.hour12 > 0 && ts->end_time.min > 0 && ts->end_time.sec > 0)
+	{
+		// get a new timestamp based on the start time and the number of seconds elapsed
+		// !TODO! future_timestamp expects 'seconds' to be unsigned int, but ts->seconds is a long double
+		// !TODO! > make a _prec_ version of the timestamp struct and functions, used for high precision time math
+		timey_timestamp future = timey_future_timestamp(&ts->start_time, 0, 0, ts->seconds);
+
+		// compare new timestamp and target timestamp
+		if(timey_timestamps_are_equal(&future, &ts->end_time))
+		{
+			timey_pause_stopwatch(ts);
+			ts->end_time_reached = true;
+		}
+	}
+}
+
+// TODO make _past_ versions of timestamp and datetime functions

@@ -97,27 +97,101 @@ $(function(){initNavTree('d7/d2d/structtimey__stopwatch.html','../../','db/d5c/s
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ad9d4dd8ba67129909dcbddceb60bada8" id="r_ad9d4dd8ba67129909dcbddceb60bada8"><td class="memItemLeft" align="right" valign="top">unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9d4dd8ba67129909dcbddceb60bada8">seconds</a></td></tr>
+<tr class="memitem:ae34212db28b41a9f83415813ee1a0417" id="r_ae34212db28b41a9f83415813ee1a0417"><td class="memItemLeft" align="right" valign="top">long double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae34212db28b41a9f83415813ee1a0417">seconds</a></td></tr>
+<tr class="memitem:ac83a6e183dc7c7110082e2c11cfcce51" id="r_ac83a6e183dc7c7110082e2c11cfcce51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/de6/structtimey__timestamp.html">timey_timestamp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac83a6e183dc7c7110082e2c11cfcce51">start_time</a></td></tr>
+<tr class="memitem:a5231a2af35987313ba4f46e51d7ea74b" id="r_a5231a2af35987313ba4f46e51d7ea74b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/de6/structtimey__timestamp.html">timey_timestamp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5231a2af35987313ba4f46e51d7ea74b">end_time</a></td></tr>
+<tr class="memitem:abdb8e5081b786d0e3e312335ccaf359d" id="r_abdb8e5081b786d0e3e312335ccaf359d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abdb8e5081b786d0e3e312335ccaf359d">paused</a></td></tr>
+<tr class="memitem:a5d711981fd2eaef36661c4cddcf97b99" id="r_a5d711981fd2eaef36661c4cddcf97b99"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d711981fd2eaef36661c4cddcf97b99">end_time_reached</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Used to track elapsed time during the program. </p>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d05/timey_8h_source.html#l00099">99</a> of file <a class="el" href="../../d8/d05/timey_8h_source.html">timey.h</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
-<a id="ad9d4dd8ba67129909dcbddceb60bada8" name="ad9d4dd8ba67129909dcbddceb60bada8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9d4dd8ba67129909dcbddceb60bada8">&#9670;&#160;</a></span>seconds</h2>
+<a id="a5231a2af35987313ba4f46e51d7ea74b" name="a5231a2af35987313ba4f46e51d7ea74b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5231a2af35987313ba4f46e51d7ea74b">&#9670;&#160;</a></span>end_time</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long long timey_stopwatch::seconds</td>
+          <td class="memname"><a class="el" href="../../de/de6/structtimey__timestamp.html">timey_timestamp</a> timey_stopwatch::end_time</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A target timestamp for when the stopwatch should automatically stop.</p>
+<dl class="section note"><dt>Note</dt><dd>Default stopwatches do not use this timestamp. You must manually set this timestamp if you want the stopwatch to automatically stop at a target time. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d05/timey_8h_source.html#l00118">118</a> of file <a class="el" href="../../d8/d05/timey_8h_source.html">timey.h</a>.</p>
+
+</div>
+</div>
+<a id="a5d711981fd2eaef36661c4cddcf97b99" name="a5d711981fd2eaef36661c4cddcf97b99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d711981fd2eaef36661c4cddcf97b99">&#9670;&#160;</a></span>end_time_reached</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool timey_stopwatch::end_time_reached</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Whether or not the stopwatch has reached its target end time.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a5231a2af35987313ba4f46e51d7ea74b">end_time</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d05/timey_8h_source.html#l00129">129</a> of file <a class="el" href="../../d8/d05/timey_8h_source.html">timey.h</a>.</p>
+
+</div>
+</div>
+<a id="abdb8e5081b786d0e3e312335ccaf359d" name="abdb8e5081b786d0e3e312335ccaf359d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdb8e5081b786d0e3e312335ccaf359d">&#9670;&#160;</a></span>paused</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool timey_stopwatch::paused</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Whether or not the stopwatch is paused. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d05/timey_8h_source.html#l00122">122</a> of file <a class="el" href="../../d8/d05/timey_8h_source.html">timey.h</a>.</p>
+
+</div>
+</div>
+<a id="ae34212db28b41a9f83415813ee1a0417" name="ae34212db28b41a9f83415813ee1a0417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae34212db28b41a9f83415813ee1a0417">&#9670;&#160;</a></span>seconds</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long double timey_stopwatch::seconds</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>The number of elapsed seconds. </p>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d05/timey_8h_source.html#l00104">104</a> of file <a class="el" href="../../d8/d05/timey_8h_source.html">timey.h</a>.</p>
+
+</div>
+</div>
+<a id="ac83a6e183dc7c7110082e2c11cfcce51" name="ac83a6e183dc7c7110082e2c11cfcce51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac83a6e183dc7c7110082e2c11cfcce51">&#9670;&#160;</a></span>start_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../de/de6/structtimey__timestamp.html">timey_timestamp</a> timey_stopwatch::start_time</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The timestamp when the stopwatch was started. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d05/timey_8h_source.html#l00108">108</a> of file <a class="el" href="../../d8/d05/timey_8h_source.html">timey.h</a>.</p>
 
 </div>
 </div>

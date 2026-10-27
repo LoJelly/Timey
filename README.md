@@ -5,7 +5,8 @@
 ## Features
 
 - Functions for obtaining the current time and date, as well as future times and dates
-- Functions for obtaining information about the current date.
+- Functions for obtaining information about the current date
+- Ability to create, pause, reset, and update stopwatches
 
 > [!NOTE]
 > Timey is not thread-safe.
