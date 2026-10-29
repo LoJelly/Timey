@@ -9,25 +9,25 @@
 typedef struct timey_timestamp
 {
 	/**
-	  Either AM or PM according to the current time.
-	*/
-	char period[3];
-	/**
 	  The time's hour in 24-hour format.
 	*/
-	unsigned char hour24;
+	long long hour24;
 	/**
 	  The time's hour in 12-hour format.
 	*/
-	unsigned char hour12;
+	long long hour12;
 	/**
 	  The time's minute.
 	*/
-	unsigned char min;
+	long long min;
 	/**
 	  The time's second.
 	*/
-	unsigned char sec;
+	long long sec;
+	/**
+	  Either AM or PM according to the current time.
+	*/
+	char period[3];
 } timey_timestamp;
 
 /**
@@ -77,15 +77,15 @@ typedef struct timey_datetime
 	/**
 	  The date's year.
 	*/
-	unsigned char year;
+	long long year;
 	/**
 	  The date's month.
 	*/
-	unsigned char month;
+	long long month;
 	/**
 	  The date's day.
 	*/
-	unsigned char day;
+	long long day;
 	/**
 	  Whether or not the year of this date-time
 	  is a leap year.
@@ -207,12 +207,22 @@ TIMEY_API timey_timestamp timey_curr_timestamp(void);
   Obtains a timestamp in the future using another
   timestamp as a starting point.
 */
-TIMEY_API timey_timestamp timey_future_timestamp(const timey_timestamp *now, unsigned int hours, unsigned int minutes, unsigned int seconds);
+TIMEY_API timey_timestamp timey_future_timestamp(const timey_timestamp *start, unsigned long long hours, unsigned long long minutes, unsigned long long seconds);
 /**
   Obtains a timestamp in the future using the
   current timestamp as the starting point.
 */
-TIMEY_API timey_timestamp timey_future_timestamp_from_now(unsigned int hours, unsigned int minutes, unsigned int seconds);
+TIMEY_API timey_timestamp timey_future_timestamp_from_now(unsigned long long hours, unsigned long long minutes, unsigned long long seconds);
+/**
+  Obtains a timestamp in the past using another timestamp
+  as a starting point.
+*/
+TIMEY_API timey_timestamp timey_past_timestamp(const timey_timestamp *start, unsigned long long hours, unsigned long long minutes, unsigned long long seconds);
+/**
+  Obtains a timestamp in the past using the
+  current timestamp as the starting point.
+*/
+TIMEY_API timey_timestamp timey_past_timestamp_from_now(unsigned long long hours, unsigned long long minutes, unsigned long long seconds);
 /**
   Creates a timestamp using a specific hour, minute, and second.
 
@@ -221,11 +231,11 @@ TIMEY_API timey_timestamp timey_future_timestamp_from_now(unsigned int hours, un
 
   @important This function expects the timestamp to be within the
   current day's current time. For past or future timestamps,
-  refer to timey_future_timestamp(...).
+  refer to timey_future_timestamp(...) and timey_past_timestamp(...).
 
-  @see timey_future_timestamp(timey_timestamp*, unsigned int, unsigned int, unsigned int)
+  @note The 'hours' argument should be in 24-hour format.
 */
-TIMEY_API timey_timestamp timey_create_timestamp(unsigned char hours, unsigned char minutes, unsigned char seconds);
+TIMEY_API timey_timestamp timey_create_timestamp(unsigned long long hour, unsigned long long minute, unsigned long long second);
 
 /**
   Obtains a datetime with the current date and time.
@@ -235,17 +245,45 @@ TIMEY_API timey_datetime timey_curr_datetime(void);
   Obtains a datetime in the future using another
   datetime as a starting point.
 */
-TIMEY_API timey_datetime timey_future_datetime(const timey_datetime *now, unsigned int years, unsigned int months, unsigned int days, unsigned int hours, unsigned int minutes, unsigned int seconds);
+TIMEY_API timey_datetime timey_future_datetime(const timey_datetime *start, unsigned long long years, unsigned long long months, unsigned long long days, unsigned long long hours, unsigned long long minutes, unsigned long long seconds);
 /**
   Obtains a datetime in the future using the current
   datetime as the starting point.
 */
-TIMEY_API timey_datetime timey_future_datetime_from_now(unsigned int years, unsigned int months, unsigned int days, unsigned int hours, unsigned int minutes, unsigned int seconds);
+TIMEY_API timey_datetime timey_future_datetime_from_now(unsigned long long years, unsigned long long months, unsigned long long days, unsigned long long hours, unsigned long long minutes, unsigned long long seconds);
+/**
+  Obtains a datetime in the past using another
+  datetime as the starting point.
+
+  @important This function uses mktime(...) which fails
+  for years before 1970.
+*/
+TIMEY_API timey_datetime timey_past_datetime(const timey_datetime *start, unsigned long long years, unsigned long long months, unsigned long long days, unsigned long long hours, unsigned long long minutes, unsigned long long seconds);
+/**
+  Obtains a datetime in the past using the current
+  datetime as the starting point.
+*/
+TIMEY_API timey_datetime timey_past_datetime_from_now(unsigned long long years, unsigned long long months, unsigned long long days, unsigned long long hours, unsigned long long minutes, unsigned long long seconds);
+/**
+  Creates a datetime using a specific year, month, day,
+  hour, minute, and second.
+
+  @note If this function fails, the returned datetime object will
+  have all fields set to 0.
+
+  @note The 'hours' argument should be in 24-hour format.
+  And the 'day' argument should be the day of the month
+  (range of 1 to 31).
+
+  @note This function uses mktime(...) which does not
+  support years before 1970.
+*/
+TIMEY_API timey_datetime timey_create_datetime(unsigned long long year, unsigned long long month, unsigned long long day, unsigned long long hour, unsigned long long minute, unsigned long long second);
 
 /**
   Determines whether or not a year is a leap year.
 */
-TIMEY_API bool timey_is_leap_year(unsigned int year);
+TIMEY_API bool timey_is_leap_year(unsigned long long year);
 /**
   Returns the number of days in a month.
 

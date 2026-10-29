@@ -4,8 +4,9 @@
 #include <string.h>
 #include "timey.h"
 
-#define TIMEY_TIME_STR_LEN 9
-#define TIMEY_DATE_STR_LEN 11
+#define TIME_STR_LEN 9
+#define DATE_STR_LEN 11
+#define TM_YEAR_START 1900
 
 // obtain and format time
 static void fmt_time(char *buffer, size_t size, const char *fmt)
@@ -137,7 +138,7 @@ timey_timestamp timey_curr_timestamp()
 	timey_timestamp ts = {0};
 
 	// obtain time
-	char time[TIMEY_TIME_STR_LEN];
+	char time[TIME_STR_LEN];
 	timey_query_time(time, sizeof time);
 
 	// obtain specific time components from string
@@ -167,12 +168,14 @@ timey_timestamp timey_curr_timestamp()
 
 	return ts;
 }
-static void switch_period(timey_timestamp *ts)
+
+static void detect_period(timey_timestamp *ts)
 {
-	if(strcmp("AM", ts->period) == 0)
-		strcpy(ts->period, "PM");
-	else
+	// see where hour24 is
+	if(ts->hour24 < 12)
 		strcpy(ts->period, "AM");
+	else if(ts->hour24 >= 12)
+		strcpy(ts->period, "PM");
 }
 static void goto_next_hour(timey_timestamp *ts)
 {
@@ -182,19 +185,26 @@ static void goto_next_hour(timey_timestamp *ts)
 	if(ts->hour24 > 24)
 		ts->hour24 -= 24;
 	if(ts->hour12 > 12)
-	{
 		ts->hour12 -= 12;
-		switch_period(ts);
-	}
 }
-timey_timestamp timey_future_timestamp(const timey_timestamp *now, unsigned int hours, unsigned int minutes, unsigned int seconds)
+static void goto_last_hour(timey_timestamp *ts)
+{
+	ts->min += 60;
+	ts->hour24 -= 1;
+	ts->hour12 -= 1;
+	if(ts->hour24 <= 0)
+		ts->hour24 += 24;
+	if(ts->hour12 <= 0)
+		ts->hour12 += 12;
+}
+timey_timestamp timey_future_timestamp(const timey_timestamp *start, unsigned long long hours, unsigned long long minutes, unsigned long long seconds)
 {
 	timey_timestamp future = {0};
 
-	if(!now)
+	if(!start)
 		return future;
 
-	future = *now;
+	future = *start;
 
 	// add hours
 	future.hour24 += hours;
@@ -204,10 +214,7 @@ timey_timestamp timey_future_timestamp(const timey_timestamp *now, unsigned int 
 	// do the same for hour12
 	future.hour12 += hours;
 	while(future.hour12 > 12)
-	{
 		future.hour12 -= 12;
-		switch_period(&future);
-	}
 
 	// add minutes
 	future.min += minutes;
@@ -226,30 +233,69 @@ timey_timestamp timey_future_timestamp(const timey_timestamp *now, unsigned int 
 			goto_next_hour(&future);
 	}
 
+	detect_period(&future);
+
 	return future;
 }
-timey_timestamp timey_future_timestamp_from_now(unsigned int hours, unsigned int minutes, unsigned int seconds)
+timey_timestamp timey_future_timestamp_from_now(unsigned long long hours, unsigned long long minutes, unsigned long long seconds)
 {
 	timey_timestamp now = timey_curr_timestamp();
 	return timey_future_timestamp(&now, hours, minutes, seconds);
 }
-timey_timestamp timey_create_timestamp(unsigned char hours, unsigned char minutes, unsigned char seconds)
+timey_timestamp timey_past_timestamp(const timey_timestamp *start, unsigned long long hours, unsigned long long minutes, unsigned long long seconds)
 {
-	struct tm time_result = {0};
-	time_result.tm_hour = hours - 1;
-	time_result.tm_min = minutes - 1;
-	time_result.tm_sec = seconds - 1;
+	timey_timestamp past = {0};
 
-	if(mktime(&time_result) == -1)
-		return (timey_timestamp) {0};
+	if(!start)
+		return past;
 
-	timey_timestamp ts = {0};
-	ts.min = minutes;
-	ts.sec = seconds;
-	ts.hour24 = hours;
-	if(hours > 12)
+	past = *start;
+
+	// work on hours first:
+	past.hour24 -= hours;
+	while(past.hour24 <= 0)
+		past.hour24 += 24;
+	past.hour12 -= hours;
+	while(past.hour12 <= 0)
+		past.hour12 += 12;
+
+	// then minutes:
+	past.min -= minutes;
+	while(past.min <= 0)
+		goto_last_hour(&past);
+
+	// then seconds:
+	past.sec -= seconds;
+	while(past.sec <= 0)
 	{
-		ts.hour12 = hours - 12;
+		past.sec += 60;
+		past.min -= 1;
+		if(past.min <= 0)
+			goto_last_hour(&past);
+	}
+
+	detect_period(&past);
+
+	return past;
+}
+timey_timestamp timey_past_timestamp_from_now(unsigned long long hours, unsigned long long minutes, unsigned long long seconds)
+{
+	timey_timestamp now = timey_curr_timestamp();
+	return timey_past_timestamp(&now, hours, minutes, seconds);
+}
+timey_timestamp timey_create_timestamp(unsigned long long hour, unsigned long long minute, unsigned long long second)
+{
+	timey_timestamp ts = {0};
+
+	if(hour > 24 || minute > 59 || second > 59)
+		return ts;
+
+	ts.min = minute;
+	ts.sec = second;
+	ts.hour24 = hour;
+	if(hour > 12)
+	{
+		ts.hour12 = hour - 12;
 		strcpy(ts.period, "PM");
 	}
 	else
@@ -345,19 +391,27 @@ static void update_datetime(timey_datetime *dt)
 	struct tm time_result = {0};
 	time_result.tm_mday = dt->day;
 	time_result.tm_mon = dt->month - 1;
-	time_result.tm_year = dt->year - 1900;
+	time_result.tm_year = dt->year - TM_YEAR_START;
+	time_result.tm_hour = dt->time.hour24 - 1;
+	time_result.tm_min = dt->time.min - 1;
+	time_result.tm_sec = dt->time.sec - 1;
 
 	if(mktime(&time_result) == -1)
+	{
+		// invalidate datetime
+		*dt = (timey_datetime) {0};
 		return;
+	}
 
 	set_day_name_dt(dt, time_result.tm_wday);
+	set_month_name_dt(dt);
 }
 timey_datetime timey_curr_datetime()
 {
 	timey_datetime dt = {0};
 
 	// obtain date
-	char date[TIMEY_DATE_STR_LEN];
+	char date[DATE_STR_LEN];
 	timey_query_date(date, sizeof date);
 
 	// obtain specific date-time components from string
@@ -366,7 +420,7 @@ timey_datetime timey_curr_datetime()
 	memcpy(month, date, 2);
 	month[2] = '\0';
 
-	memcpy(day, date + 4, 2);
+	memcpy(day, date + 3, 2);
 	day[2] = '\0';
 
 	memcpy(year, date + 6, 4);
@@ -387,12 +441,16 @@ static void goto_next_year(timey_datetime *dt)
 {
 	dt->month -= 12;
 	dt->year += 1;
-	dt->is_leap_year = timey_is_leap_year(dt->year);
 }
-static void add_days_dt(timey_datetime *dt, unsigned int days)
+static void goto_last_year(timey_datetime *dt)
+{
+	dt->month += 12;
+	dt->year -= 1;
+}
+static void add_days_dt(timey_datetime *dt, unsigned long long days)
 {
 	dt->day += days;
-	unsigned int max_month_days = timey_num_days_in_month_dt(dt);
+	unsigned char max_month_days = timey_num_days_in_month_dt(dt);
 	while(dt->day > max_month_days)
 	{
 		dt->day -= max_month_days;
@@ -402,14 +460,30 @@ static void add_days_dt(timey_datetime *dt, unsigned int days)
 		max_month_days = timey_num_days_in_month_dt(dt);
 	}
 }
-timey_datetime timey_future_datetime(const timey_datetime *now, unsigned int years, unsigned int months, unsigned int days, unsigned int hours, unsigned int minutes, unsigned int seconds)
+static void minus_days_dt(timey_datetime *dt, unsigned long long days)
+{
+	dt->day -= days;
+	unsigned char max_month_days = timey_num_days_in_month_dt(dt);
+	while(dt->day <= 0)
+	{
+		// get the new max number of days for the new month
+		dt->month -= 1;
+		if(dt->month <= 0)
+			goto_last_year(dt);
+		max_month_days = timey_num_days_in_month_dt(dt);
+
+		// now add back days
+		dt->day += max_month_days;
+	}
+}
+timey_datetime timey_future_datetime(const timey_datetime *start, unsigned long long years, unsigned long long months, unsigned long long days, unsigned long long hours, unsigned long long minutes, unsigned long long seconds)
 {
 	timey_datetime future = {0};
 
-	if(!now)
+	if(!start)
 		return future;
 
-	future = *now;
+	future = *start;
 
 	// add years
 	future.year += years;
@@ -434,15 +508,9 @@ timey_datetime timey_future_datetime(const timey_datetime *now, unsigned int yea
 	}
 	ts->hour12 += hours;
 	if(ts->hour12 == 12)
-	{
-		switch_period(ts);
 		add_days_dt(&future, 1);
-	}
 	while(ts->hour12 > 12)
-	{
 		ts->hour12 -= 12;
-		switch_period(ts);
-	}
 
 	ts->min += minutes;
 	while(ts->min > 60)
@@ -456,10 +524,7 @@ timey_datetime timey_future_datetime(const timey_datetime *now, unsigned int yea
 			add_days_dt(&future, 1);
 		}
 		if(ts->hour12 > 12)
-		{
 			ts->hour12 -= 12;
-			switch_period(ts);
-		}
 	}
 
 	ts->sec += seconds;
@@ -478,27 +543,134 @@ timey_datetime timey_future_datetime(const timey_datetime *now, unsigned int yea
 				add_days_dt(&future, 1);
 			}
 			if(ts->hour12 > 12)
-			{
 				ts->hour12 -= 12;
-				switch_period(ts);
-			}
 		}
 	}
 
-	// update day and month names
-	set_month_name_dt(&future);
+	// update day and month names, as well as period
 	update_datetime(&future);
+	detect_period(ts);
+	future.is_leap_year = timey_is_leap_year(future.year);
 
 	return future;
 }
-timey_datetime timey_future_datetime_from_now(unsigned int years, unsigned int months, unsigned int days, unsigned int hours, unsigned int minutes, unsigned int seconds)
+timey_datetime timey_future_datetime_from_now(unsigned long long years, unsigned long long months, unsigned long long days, unsigned long long hours, unsigned long long minutes, unsigned long long seconds)
 {
 	timey_datetime now = timey_curr_datetime();
 	return timey_future_datetime(&now, years, months, days, hours, minutes, seconds);
 }
-
-bool timey_is_leap_year(unsigned int year)
+timey_datetime timey_past_datetime(const timey_datetime *start, unsigned long long years, unsigned long long months, unsigned long long days, unsigned long long hours, unsigned long long minutes, unsigned long long seconds)
 {
+	timey_datetime past = {0};
+
+	if(!start)
+		return past;
+
+	past = *start;
+
+	// just take away years
+	past.year -= years;
+
+	// work on months:
+	past.month -= months;
+	while(past.month <= 0)
+		goto_last_year(&past);
+
+	// take away days
+	minus_days_dt(&past, days);
+
+	// work on timestamp
+	timey_timestamp *ts = &past.time;
+
+	// hours:
+	ts->hour24 -= hours;
+	while(ts->hour24 <= 0)
+	{
+		ts->hour24 += 24;
+		minus_days_dt(&past, 1);
+	}
+	ts->hour12 -= hours;
+	if(ts->hour12 == 12)
+		minus_days_dt(&past, 1);
+	while(ts->hour12 <= 0)
+		ts->hour12 += 12;
+
+	// minutes:
+	ts->min -= minutes;
+	while(ts->min <= 0)
+	{
+		ts->min += 60;
+		ts->hour24 -= 1;
+		ts->hour12 -= 1;
+		if(ts->hour24 <= 0)
+		{
+			ts->hour24 += 24;
+			minus_days_dt(&past, 1);
+		}
+		if(ts->hour12 <= 0)
+			ts->hour12 += 12;
+	}
+
+	// seconds:
+	ts->sec -= seconds;
+	while(ts->sec <= 0)
+	{
+		ts->sec += 60;
+		ts->min -= 1;
+		if(ts->min <= 0)
+		{
+			ts->min += 60;
+			ts->hour24 -= 1;
+			ts->hour12 -= 1;
+			if(ts->hour24 <= 0)
+			{
+				ts->hour24 += 24;
+				minus_days_dt(&past, 1);
+			}
+			if(ts->hour12 <= 0)
+				ts->hour12 += 12;
+		}
+	}
+
+	update_datetime(&past);
+	detect_period(ts);
+	past.is_leap_year = timey_is_leap_year(past.year);
+
+	return past;
+}
+timey_datetime timey_past_datetime_from_now(unsigned long long years, unsigned long long months, unsigned long long days, unsigned long long hours, unsigned long long minutes, unsigned long long seconds)
+{
+	timey_datetime now = timey_curr_datetime();
+	return timey_past_datetime(&now, years, months, days, hours, minutes, seconds);
+}
+timey_datetime timey_create_datetime(unsigned long long year, unsigned long long month, unsigned long long day, unsigned long long hour, unsigned long long minute, unsigned long long second)
+{
+	timey_datetime dt = {0};
+
+	if(month > 12 || day > 31 || hour > 24 || minute > 59 || second > 59)
+		return dt;
+
+	dt.time = timey_create_timestamp(hour, minute, second);
+
+	dt.day = day;
+	dt.month = month;
+	dt.year = year;
+	dt.is_leap_year = timey_is_leap_year(year);
+
+	update_datetime(&dt);
+
+	return dt;
+}
+
+bool timey_is_leap_year(unsigned long long year)
+{
+	/*
+	   a year is a leap year if any one of the following
+	   conditions are satisfied: 
+
+	   the year is multiple of 400.
+	   the year is a multiple of 4 and not a multiple of 100.
+	*/
 	return (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0);
 }
 static const unsigned char DAY_NUMS[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
@@ -624,7 +796,7 @@ void timey_update_stopwatch(timey_stopwatch *ts, long double delta_time)
 	if(ts->end_time.hour12 > 0 && ts->end_time.min > 0 && ts->end_time.sec > 0)
 	{
 		// get a new timestamp based on the start time and the number of seconds elapsed
-		// !TODO! future_timestamp expects 'seconds' to be unsigned int, but ts->seconds is a long double
+		// !TODO! future_timestamp expects 'seconds' to be unsigned long long, but ts->seconds is a long double
 		// !TODO! > make a _prec_ version of the timestamp struct and functions, used for high precision time math
 		timey_timestamp future = timey_future_timestamp(&ts->start_time, 0, 0, ts->seconds);
 
