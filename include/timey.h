@@ -4,6 +4,21 @@
 #include <stdbool.h>
 
 /**
+  The required amount of chars for the
+  default time string returned by timey_query_time(...).
+
+  @note This already takes the null terminator into account.
+*/
+#define TIMEY_TIME_STR_LEN 9
+/**
+  The required amount of chars for the
+  default date string returned by timey_query_date(...).
+
+  @note This already takes the null terminator into account.
+*/
+#define TIMEY_DATE_STR_LEN 11
+
+/**
   Holds time data (hour, minute, and second).
 */
 typedef struct timey_timestamp

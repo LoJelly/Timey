@@ -6,6 +6,8 @@ var timey_8h =
     [ "timey_stopwatch", "d7/d2d/structtimey__stopwatch.html", "d7/d2d/structtimey__stopwatch" ],
     [ "timey_timer", "db/de7/structtimey__timer.html", "db/de7/structtimey__timer" ],
     [ "TIMEY_API", "d8/d05/timey_8h.html#acfe8f6b568b67bb54ef5650a89639b8a", null ],
+    [ "TIMEY_DATE_STR_LEN", "d8/d05/timey_8h.html#a4cd35bfffaf13f9d506b0ef7a8abb8b6", null ],
+    [ "TIMEY_TIME_STR_LEN", "d8/d05/timey_8h.html#a6ca76b82f98c9f9e8c6a0d06f6151dac", null ],
     [ "timey_datetime", "d8/d05/timey_8h.html#a6eae5f573a97175387ca13293bf86c9a", null ],
     [ "timey_raw_time", "d8/d05/timey_8h.html#a54fb92a743d3215e84c496ba49a4f198", null ],
     [ "timey_stopwatch", "d8/d05/timey_8h.html#adf601bef9d783c28d0103feee2817fa0", null ],

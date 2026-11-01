@@ -4,8 +4,6 @@
 #include <string.h>
 #include "timey.h"
 
-#define TIME_STR_LEN 9
-#define DATE_STR_LEN 11
 #define TM_YEAR_START 1900
 
 // obtain and format time
@@ -146,7 +144,7 @@ timey_timestamp timey_curr_timestamp()
 	timey_timestamp ts = {0};
 
 	// obtain time
-	char time[TIME_STR_LEN];
+	char time[TIMEY_TIME_STR_LEN];
 	timey_query_time(time, sizeof time);
 
 	// obtain specific time components from string
@@ -419,7 +417,7 @@ timey_datetime timey_curr_datetime()
 	timey_datetime dt = {0};
 
 	// obtain date
-	char date[DATE_STR_LEN];
+	char date[TIMEY_DATE_STR_LEN];
 	timey_query_date(date, sizeof date);
 
 	// obtain specific date-time components from string
