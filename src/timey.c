@@ -43,17 +43,25 @@ void timey_query_raw_time(timey_raw_time *t)
 }
 void timey_query_time(char *buffer, size_t buffer_size)
 {
-	if(!buffer)
-		return;
-
-	fmt_time(buffer, buffer_size, "%H:%M:%S");
+	timey_query_time_fmt(buffer, buffer_size, "%H:%M:%S");
 }
-void timey_query_date(char *buffer, size_t buffer_size)
+void timey_query_time_fmt(char *buffer, size_t buffer_size, const char *fmt)
 {
 	if(!buffer)
 		return;
 
-	fmt_time(buffer, buffer_size, "%m-%d-%Y");
+	fmt_time(buffer, buffer_size, fmt);
+}
+void timey_query_date(char *buffer, size_t buffer_size)
+{
+	timey_query_date_fmt(buffer, buffer_size, "%m-%d-%Y");
+}
+void timey_query_date_fmt(char *buffer, size_t buffer_size, const char *fmt)
+{
+	if(!buffer)
+		return;
+
+	fmt_time(buffer, buffer_size, fmt);
 }
 
 // array of months, where the index corresponds to the month number - 1
@@ -809,4 +817,27 @@ void timey_update_stopwatch(timey_stopwatch *ts, long double delta_time)
 	}
 }
 
-// TODO make _past_ versions of timestamp and datetime functions
+timey_timer timey_new_timer()
+{
+	timey_timer t = {0};
+	t.active = true;
+	return t;
+}
+void timey_update_timer(timey_timer *t, long double delta_time, void *args)
+{
+	if(!t || !t->active)
+		return;
+
+	t->seconds -= delta_time;
+
+	if(t->seconds <= 0)
+	{
+		// execute action if one is given
+		if(t->action)
+			t->action(args);
+
+		// make sure timer stops updating unless the timer should loop
+		if(!t->loop)
+			t->active = false;
+	}
+}

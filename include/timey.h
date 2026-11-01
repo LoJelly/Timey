@@ -129,6 +129,58 @@ typedef struct timey_stopwatch
 	bool end_time_reached;
 } timey_stopwatch;
 
+/**
+  A function used in timey_timers.
+
+  The function should return nothing
+  and take in a generic pointer that can
+  represent any kind of argument.
+
+  @see timey_timer
+*/
+typedef void (*timey_timer_fn) (void*);
+
+/**
+  Used to count down time before
+  an action is executed.
+*/
+typedef struct timey_timer
+{
+	/**
+	  The number of seconds the timer
+	  should last.
+	*/
+	long double seconds;
+	/**
+	  The function that should execute when the timer
+	  has reached its end time.
+
+	  @see timey_timer_fn
+	*/
+	timey_timer_fn action;
+	/**
+	  Whether or not this timer should
+	  loop. By default, this is false,
+	  which means once the timer's
+	  amount of target seconds has elapsed,
+	  it becomes inactive.
+	*/
+	bool loop;
+	/**
+	  Whether or not the timer is currently active.
+	  For timers without loops, this will remain true
+	  after the target amount of seconds has
+	  elapsed. For timers that should loop,
+	  this will remain false, until explicitly
+	  set to true.
+
+	  Once this is set to true, either manually
+	  or automatically, the timer will become
+	  inactive, and will not respond to updates.
+	*/
+	bool active;
+} timey_timer;
+
 #ifdef _WIN32
 	#ifdef TIMEY_DLL
 		#ifdef TIMEY_EXPORTS
@@ -157,6 +209,17 @@ TIMEY_API void timey_query_raw_time(timey_raw_time *t);
 */
 TIMEY_API void timey_query_time(char *buffer, size_t buffer_size);
 /**
+  Obtains the current time and inserts it into a string buffer.
+
+  This function is similar to timey_query_time(...) but it
+  accepts a specific custom format for the time string.
+  The default format that is used in timey_query_time(...)
+  is '%H:%M:%S.'
+
+  @see timey_query_time(char*, size_t)
+*/
+TIMEY_API void timey_query_time_fmt(char *buffer, size_t buffer_size, const char *fmt);
+/**
   Obtains the current date and inserts it into a string buffer.
 
   @note For the buffer to hold the full date, the buffer must
@@ -164,6 +227,17 @@ TIMEY_API void timey_query_time(char *buffer, size_t buffer_size);
   format of "mm-dd-yyyy."
 */
 TIMEY_API void timey_query_date(char *buffer, size_t buffer_size);
+/**
+  Obtains the current date and inserts it into a string buffer.
+
+  This function is similar to timey_query_date(...) but it
+  accepts a specific custom format for the date string.
+  The default format that is used in timey_query_date(...)
+  is '%m-%d-%Y.'
+
+  @see timey_query_date(char*, size_t)
+*/
+TIMEY_API void timey_query_date_fmt(char *buffer, size_t buffer_size, const char *fmt);
 /**
   Obtains the corresponding month name and inserts it into a string buffer.
 
@@ -373,3 +447,19 @@ TIMEY_API void timey_reset_stopwatch(timey_stopwatch *ts);
   field on the stopwatch will be true.
 */
 TIMEY_API void timey_update_stopwatch(timey_stopwatch *ts, long double delta_time);
+
+/**
+  Creates a new timer.
+*/
+TIMEY_API timey_timer timey_new_timer(void);
+/**
+  Updates a timer.
+
+  Use this function in the program's main loop
+  using the delta time value to update the timer.
+
+  The 3rd argument to this function should be the
+  same argument that should be passed into
+  the timer's action function, if it has one.
+*/
+TIMEY_API void timey_update_timer(timey_timer *t, long double delta_time, void *args);
