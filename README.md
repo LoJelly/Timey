@@ -4,8 +4,7 @@
 
 ## Features
 
-- Functions for obtaining the current time and date, as well as future times and dates
-- Functions for obtaining information about the current date
+- Functions for obtaining the current time and date, as well as future and past times and dates
 - Tools like stopwatches and timers
 
 > [!NOTE]
@@ -16,6 +15,16 @@
 Here is a simple example of Timey's features:
 
 ```c
+/*
+   raw time objects contain 4 fields, 'sec,' 'millisec,'
+   'microsec,' and 'nanosec,' which all represent the number
+   of seconds elapsed since the UNIX epoch (Jan 1, 1970).
+
+   you can obtain the raw time like so:
+*/
+timey_raw_time raw_time = {0};
+timey_query_raw_time(&raw_time);
+
 // you can query the raw time string like this (in the format of HOUR:MIN:SEC)
 char time[TIMEY_TIME_STR_LEN];
 timey_query_time(time, TIMEY_TIME_STR_LEN);
@@ -45,4 +54,4 @@ printf("The year and leap year status: %lld %d\n", dt.year, dt.is_leap_year);
 
 ## Documenation
 
-Please refer to the Timey docs <a href="docs/html" targets="_blank">here</a>
+Please refer to the Timey docs <a href="docs/html" targets="_blank">here</a>. (Open 'index.html' in file explorer)
