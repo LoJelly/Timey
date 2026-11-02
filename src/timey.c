@@ -411,6 +411,8 @@ static void update_datetime(timey_datetime *dt)
 
 	set_day_name_dt(dt, time_result.tm_wday);
 	set_month_name_dt(dt);
+	dt->is_leap_year = timey_is_leap_year(dt->year);
+	dt->is_dst_active = timey_is_dst_active_dt(dt);
 }
 timey_datetime timey_curr_datetime()
 {
@@ -558,7 +560,6 @@ timey_datetime timey_future_datetime(const timey_datetime *start, unsigned long 
 	// update day and month names, as well as period
 	update_datetime(&future);
 	detect_period(ts);
-	future.is_leap_year = timey_is_leap_year(future.year);
 
 	return future;
 }
@@ -642,7 +643,6 @@ timey_datetime timey_past_datetime(const timey_datetime *start, unsigned long lo
 
 	update_datetime(&past);
 	detect_period(ts);
-	past.is_leap_year = timey_is_leap_year(past.year);
 
 	return past;
 }
@@ -663,7 +663,6 @@ timey_datetime timey_create_datetime(unsigned long long year, unsigned long long
 	dt.day = day;
 	dt.month = month;
 	dt.year = year;
-	dt.is_leap_year = timey_is_leap_year(year);
 
 	update_datetime(&dt);
 
@@ -699,6 +698,14 @@ bool timey_is_dst_active(unsigned long long year, unsigned long long month, unsi
 	else
 		return false;
 }
+bool timey_is_dst_active_dt(const timey_datetime *dt)
+{
+	if(!dt)
+		return false;
+
+	return timey_is_dst_active(dt->year, dt->month, dt->day, dt->time.hour24);
+}
+
 static const unsigned char DAY_NUMS[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 unsigned char timey_num_days_in_month(unsigned char month)
 {

@@ -384,6 +384,13 @@ TIMEY_API bool timey_is_leap_year(unsigned long long year);
 */
 TIMEY_API bool timey_is_dst_active(unsigned long long year, unsigned long long month, unsigned long long day, unsigned long long hour);
 /**
+  Same as timey_is_dst_active(...) but gathers data
+  from a datetime object instead.
+
+  @see timey_is_dst_active(unsigned long long, unsigned long long, unsigned long long, unsigned long long)
+*/
+TIMEY_API bool timey_is_dst_active_dt(const timey_datetime *dt);
+/**
   Returns the number of days in a month.
 
   For February, 28 is always returned by this function.

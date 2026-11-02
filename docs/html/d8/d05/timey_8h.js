@@ -24,6 +24,7 @@ var timey_8h =
     [ "timey_future_timestamp", "d8/d05/timey_8h.html#af5bdccff3b7ce78851ae8339a6c2e810", null ],
     [ "timey_future_timestamp_from_now", "d8/d05/timey_8h.html#ad8be7281086784781568e980e6b0cf48", null ],
     [ "timey_is_dst_active", "d8/d05/timey_8h.html#aa7c2d3f6c2b501488b4a7aeab82000d5", null ],
+    [ "timey_is_dst_active_dt", "d8/d05/timey_8h.html#a307a196adead16106a57357024d925bc", null ],
     [ "timey_is_leap_year", "d8/d05/timey_8h.html#ab5058f2508f42868d70fd86c5d23b85c", null ],
     [ "timey_new_stopwatch", "d8/d05/timey_8h.html#a2f3504e2634c725a59c097e8bd6052f8", null ],
     [ "timey_new_timer", "d8/d05/timey_8h.html#a309d4016af72304795a5ad7f9c757f3e", null ],
