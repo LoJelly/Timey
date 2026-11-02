@@ -2,6 +2,7 @@ var structtimey__datetime =
 [
     [ "day", "da/db9/structtimey__datetime.html#a1a9aaeeb3cfc43bda634bd1274dc1ba2", null ],
     [ "day_name", "da/db9/structtimey__datetime.html#a22bf9ef1ca260655e9ea24cecba2a820", null ],
+    [ "is_dst_active", "da/db9/structtimey__datetime.html#a7aa8b7284bd46b843b3ea7bd6303f7fb", null ],
     [ "is_leap_year", "da/db9/structtimey__datetime.html#a95286ffb7e6f942061072523a9cc4899", null ],
     [ "month", "da/db9/structtimey__datetime.html#a3681493f90477b1f3d97992b8489b2b3", null ],
     [ "month_name", "da/db9/structtimey__datetime.html#a5719641e09cce6aafae996ea9ec1dffa", null ],

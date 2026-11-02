@@ -106,6 +106,11 @@ typedef struct timey_datetime
 	  is a leap year.
 	*/
 	bool is_leap_year;
+	/**
+	  Whether or not daylight saving time is
+	  currently active.
+	*/
+	bool is_dst_active;
 } timey_datetime;
 
 /**
@@ -373,6 +378,11 @@ TIMEY_API timey_datetime timey_create_datetime(unsigned long long year, unsigned
   Determines whether or not a year is a leap year.
 */
 TIMEY_API bool timey_is_leap_year(unsigned long long year);
+/**
+  Determines whether or not daylight saving time is active
+  for the given date and time.
+*/
+TIMEY_API bool timey_is_dst_active(unsigned long long year, unsigned long long month, unsigned long long day, unsigned long long hour);
 /**
   Returns the number of days in a month.
 

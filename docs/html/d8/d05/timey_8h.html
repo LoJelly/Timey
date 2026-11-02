@@ -142,6 +142,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a25b2ee854fd9a8092a66e818e2719776" id="r_a25b2ee854fd9a8092a66e818e2719776"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> <a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25b2ee854fd9a8092a66e818e2719776">timey_past_datetime_from_now</a> (unsigned long long years, unsigned long long months, unsigned long long days, unsigned long long hours, unsigned long long minutes, unsigned long long seconds)</td></tr>
 <tr class="memitem:a3069c11a8b76d9b69c26d774c6873edb" id="r_a3069c11a8b76d9b69c26d774c6873edb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> <a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3069c11a8b76d9b69c26d774c6873edb">timey_create_datetime</a> (unsigned long long year, unsigned long long month, unsigned long long day, unsigned long long hour, unsigned long long minute, unsigned long long second)</td></tr>
 <tr class="memitem:ab5058f2508f42868d70fd86c5d23b85c" id="r_ab5058f2508f42868d70fd86c5d23b85c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5058f2508f42868d70fd86c5d23b85c">timey_is_leap_year</a> (unsigned long long year)</td></tr>
+<tr class="memitem:aa7c2d3f6c2b501488b4a7aeab82000d5" id="r_aa7c2d3f6c2b501488b4a7aeab82000d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7c2d3f6c2b501488b4a7aeab82000d5">timey_is_dst_active</a> (unsigned long long year, unsigned long long month, unsigned long long day, unsigned long long hour)</td></tr>
 <tr class="memitem:a9aaf15c76de7c09436eba7d4335aab15" id="r_a9aaf15c76de7c09436eba7d4335aab15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9aaf15c76de7c09436eba7d4335aab15">timey_num_days_in_month</a> (unsigned char month)</td></tr>
 <tr class="memitem:a2d18e640fc6ee114c0d93277161a9a91" id="r_a2d18e640fc6ee114c0d93277161a9a91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d18e640fc6ee114c0d93277161a9a91">timey_num_days_in_month_dt</a> (const <a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a> *dt)</td></tr>
 <tr class="memitem:acc9ba1b9664aeb8af7c16224e4c38629" id="r_acc9ba1b9664aeb8af7c16224e4c38629"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc9ba1b9664aeb8af7c16224e4c38629">timey_set_day</a> (<a class="el" href="../../da/db9/structtimey__datetime.html">timey_datetime</a> *dt, unsigned char day)</td></tr>
@@ -170,9 +171,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">210</a> of file <a class="el" href="../../d8/d05/timey_8h_source.html">timey.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">215</a> of file <a class="el" href="../../d8/d05/timey_8h_source.html">timey.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a3069c11a8b76d9b69c26d774c6873edb">timey_create_datetime()</a>, <a class="el" href="#a1bcc52bdb16959569b6b938368f82e1e">timey_create_timestamp()</a>, <a class="el" href="#a02a8b9052f142212fdacb6fb6c213268">timey_curr_datetime()</a>, <a class="el" href="#aaadca3a2da71a7f3c33821a41e672446">timey_curr_timestamp()</a>, <a class="el" href="#aa11a18dd1660f36af54dd0a3b7b16bdb">timey_datetimes_are_equal()</a>, <a class="el" href="#a48d406c8b1029b53af6a90e4e7d4d4ed">timey_future_datetime()</a>, <a class="el" href="#a072cc820b86e09fba0037fb185a6ef3e">timey_future_datetime_from_now()</a>, <a class="el" href="#af5bdccff3b7ce78851ae8339a6c2e810">timey_future_timestamp()</a>, <a class="el" href="#ad8be7281086784781568e980e6b0cf48">timey_future_timestamp_from_now()</a>, <a class="el" href="#ab5058f2508f42868d70fd86c5d23b85c">timey_is_leap_year()</a>, <a class="el" href="#a2f3504e2634c725a59c097e8bd6052f8">timey_new_stopwatch()</a>, <a class="el" href="#a309d4016af72304795a5ad7f9c757f3e">timey_new_timer()</a>, <a class="el" href="#a9aaf15c76de7c09436eba7d4335aab15">timey_num_days_in_month()</a>, <a class="el" href="#a2d18e640fc6ee114c0d93277161a9a91">timey_num_days_in_month_dt()</a>, <a class="el" href="#a221465c62a79d66a8fa14db85618ca18">timey_past_datetime()</a>, <a class="el" href="#a25b2ee854fd9a8092a66e818e2719776">timey_past_datetime_from_now()</a>, <a class="el" href="#a2fe3fb944adfd194da5fa8b3ac4aa8d7">timey_past_timestamp()</a>, <a class="el" href="#af491ee0df55d55737606da0ce89cc98c">timey_past_timestamp_from_now()</a>, <a class="el" href="#a2dde7583f348face1b8ae0263e0f2e29">timey_pause_stopwatch()</a>, <a class="el" href="#a3e21bc5fa46cad0363058ef7097bb04d">timey_query_date()</a>, <a class="el" href="#add6559ac53e94389cc81936ed2fe21fc">timey_query_date_fmt()</a>, <a class="el" href="#a29294376e4f56c71affb24765cf39bb7">timey_query_day_name()</a>, <a class="el" href="#ac4bc69bf3559958233fecb896839b61e">timey_query_month_name()</a>, <a class="el" href="#a735ef5afc67564d3baed5fb3b3d3ebdd">timey_query_raw_time()</a>, <a class="el" href="#ac8d41a3062b3f035a8147c130ee998e4">timey_query_time()</a>, <a class="el" href="#ad6d04d52ebffbde36fd543aa1c4575fe">timey_query_time_fmt()</a>, <a class="el" href="#aea404ee95567646f7431a65d18dee58d">timey_reset_stopwatch()</a>, <a class="el" href="#acc9ba1b9664aeb8af7c16224e4c38629">timey_set_day()</a>, <a class="el" href="#a2aaef2916b138233e709eb5bb4f0f4ad">timey_set_month()</a>, <a class="el" href="#aa36d4d6ba35e711bc311b0c6cc0427a4">timey_set_year()</a>, <a class="el" href="#a8996db01214aecf9b3dbf421772ebfdb">timey_start_stopwatch()</a>, <a class="el" href="#a5a623e01c2e49f591f55c6d0aecc4262">timey_timestamps_are_equal()</a>, <a class="el" href="#ae4b34d8533d52bc3b97b69108573a7ad">timey_update_stopwatch()</a>, and <a class="el" href="#ab6909817bc690bfaf6199e7076cc8a65">timey_update_timer()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="#a3069c11a8b76d9b69c26d774c6873edb">timey_create_datetime()</a>, <a class="el" href="#a1bcc52bdb16959569b6b938368f82e1e">timey_create_timestamp()</a>, <a class="el" href="#a02a8b9052f142212fdacb6fb6c213268">timey_curr_datetime()</a>, <a class="el" href="#aaadca3a2da71a7f3c33821a41e672446">timey_curr_timestamp()</a>, <a class="el" href="#aa11a18dd1660f36af54dd0a3b7b16bdb">timey_datetimes_are_equal()</a>, <a class="el" href="#a48d406c8b1029b53af6a90e4e7d4d4ed">timey_future_datetime()</a>, <a class="el" href="#a072cc820b86e09fba0037fb185a6ef3e">timey_future_datetime_from_now()</a>, <a class="el" href="#af5bdccff3b7ce78851ae8339a6c2e810">timey_future_timestamp()</a>, <a class="el" href="#ad8be7281086784781568e980e6b0cf48">timey_future_timestamp_from_now()</a>, <a class="el" href="#aa7c2d3f6c2b501488b4a7aeab82000d5">timey_is_dst_active()</a>, <a class="el" href="#ab5058f2508f42868d70fd86c5d23b85c">timey_is_leap_year()</a>, <a class="el" href="#a2f3504e2634c725a59c097e8bd6052f8">timey_new_stopwatch()</a>, <a class="el" href="#a309d4016af72304795a5ad7f9c757f3e">timey_new_timer()</a>, <a class="el" href="#a9aaf15c76de7c09436eba7d4335aab15">timey_num_days_in_month()</a>, <a class="el" href="#a2d18e640fc6ee114c0d93277161a9a91">timey_num_days_in_month_dt()</a>, <a class="el" href="#a221465c62a79d66a8fa14db85618ca18">timey_past_datetime()</a>, <a class="el" href="#a25b2ee854fd9a8092a66e818e2719776">timey_past_datetime_from_now()</a>, <a class="el" href="#a2fe3fb944adfd194da5fa8b3ac4aa8d7">timey_past_timestamp()</a>, <a class="el" href="#af491ee0df55d55737606da0ce89cc98c">timey_past_timestamp_from_now()</a>, <a class="el" href="#a2dde7583f348face1b8ae0263e0f2e29">timey_pause_stopwatch()</a>, <a class="el" href="#a3e21bc5fa46cad0363058ef7097bb04d">timey_query_date()</a>, <a class="el" href="#add6559ac53e94389cc81936ed2fe21fc">timey_query_date_fmt()</a>, <a class="el" href="#a29294376e4f56c71affb24765cf39bb7">timey_query_day_name()</a>, <a class="el" href="#ac4bc69bf3559958233fecb896839b61e">timey_query_month_name()</a>, <a class="el" href="#a735ef5afc67564d3baed5fb3b3d3ebdd">timey_query_raw_time()</a>, <a class="el" href="#ac8d41a3062b3f035a8147c130ee998e4">timey_query_time()</a>, <a class="el" href="#ad6d04d52ebffbde36fd543aa1c4575fe">timey_query_time_fmt()</a>, <a class="el" href="#aea404ee95567646f7431a65d18dee58d">timey_reset_stopwatch()</a>, <a class="el" href="#acc9ba1b9664aeb8af7c16224e4c38629">timey_set_day()</a>, <a class="el" href="#a2aaef2916b138233e709eb5bb4f0f4ad">timey_set_month()</a>, <a class="el" href="#aa36d4d6ba35e711bc311b0c6cc0427a4">timey_set_year()</a>, <a class="el" href="#a8996db01214aecf9b3dbf421772ebfdb">timey_start_stopwatch()</a>, <a class="el" href="#a5a623e01c2e49f591f55c6d0aecc4262">timey_timestamps_are_equal()</a>, <a class="el" href="#ae4b34d8533d52bc3b97b69108573a7ad">timey_update_stopwatch()</a>, and <a class="el" href="#ab6909817bc690bfaf6199e7076cc8a65">timey_update_timer()</a>.</p>
 
 </div>
 </div>
@@ -289,7 +290,7 @@ Functions</h2></td></tr>
 <p>The function should return nothing and take in a generic pointer that can represent any kind of argument.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="../../db/de7/structtimey__timer.html">timey_timer</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d05/timey_8h_source.html#l00156">156</a> of file <a class="el" href="../../d8/d05/timey_8h_source.html">timey.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d05/timey_8h_source.html#l00161">161</a> of file <a class="el" href="../../d8/d05/timey_8h_source.html">timey.h</a>.</p>
 
 </div>
 </div>
@@ -354,7 +355,7 @@ The 'hours' argument should be in 24-hour format. And the 'day' argument should 
 <dd>
 This function uses mktime(...) which does not support years before 1970. </dd></dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -386,7 +387,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 <dl class="section important"><dt>Important</dt><dd>This function expects the timestamp to be within the current day's current time. For past or future timestamps, refer to timey_future_timestamp(...) and timey_past_timestamp(...).</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The 'hours' argument should be in 24-hour format. </dd></dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -406,7 +407,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 </div><div class="memdoc">
 <p>Obtains a datetime with the current date and time. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -426,7 +427,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 </div><div class="memdoc">
 <p>Obtains a timestamp with the current time. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -450,7 +451,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 </div><div class="memdoc">
 <p>Determines if two datetimes are equal. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -499,7 +500,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 </div><div class="memdoc">
 <p>Obtains a datetime in the future using another datetime as a starting point. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -543,7 +544,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 </div><div class="memdoc">
 <p>Obtains a datetime in the future using the current datetime as the starting point. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -577,7 +578,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 </div><div class="memdoc">
 <p>Obtains a timestamp in the future using another timestamp as a starting point. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -606,7 +607,41 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 </div><div class="memdoc">
 <p>Obtains a timestamp in the future using the current timestamp as the starting point. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
+
+</div>
+</div>
+<a id="aa7c2d3f6c2b501488b4a7aeab82000d5" name="aa7c2d3f6c2b501488b4a7aeab82000d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7c2d3f6c2b501488b4a7aeab82000d5">&#9670;&#160;</a></span>timey_is_dst_active()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#acfe8f6b568b67bb54ef5650a89639b8a">TIMEY_API</a> bool timey_is_dst_active </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long long</td>          <td class="paramname"><span class="paramname"><em>year</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long long</td>          <td class="paramname"><span class="paramname"><em>month</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long long</td>          <td class="paramname"><span class="paramname"><em>day</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long long</td>          <td class="paramname"><span class="paramname"><em>hour</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Determines whether or not daylight saving time is active for the given date and time. </p>
+
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -626,7 +661,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 </div><div class="memdoc">
 <p>Determines whether or not a year is a leap year. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -646,7 +681,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 </div><div class="memdoc">
 <p>Creates a stopwatch. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -666,7 +701,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 </div><div class="memdoc">
 <p>Creates a new timer. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -688,7 +723,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 <p>For February, 28 is always returned by this function.</p>
 <p>If the given month is invalid, 0 is returned. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -710,7 +745,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 <p>For February, based on if the datetime's year is leap year, either 29 or 28 is returned.</p>
 <p>If the datetime is invalid in any way, 0 is returned. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -760,7 +795,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 <p>Obtains a datetime in the past using another datetime as the starting point.</p>
 <dl class="section important"><dt>Important</dt><dd>This function uses mktime(...) which fails for years before 1970. </dd></dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -804,7 +839,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 </div><div class="memdoc">
 <p>Obtains a datetime in the past using the current datetime as the starting point. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -838,7 +873,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 </div><div class="memdoc">
 <p>Obtains a timestamp in the past using another timestamp as a starting point. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -867,7 +902,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 </div><div class="memdoc">
 <p>Obtains a timestamp in the past using the current timestamp as the starting point. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -888,7 +923,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 <p>Pauses a stopwatch.</p>
 <p>Pausing a stopwatch does not reset the amount of elapsed seconds the stopwatch has currently tracked. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -913,7 +948,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 <p>Obtains the current date and inserts it into a string buffer.</p>
 <dl class="section note"><dt>Note</dt><dd>For the buffer to hold the full date, the buffer must have a size of at least 11 bytes. The buffer will be in the format of "mm-dd-yyyy." </dd></dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -944,7 +979,7 @@ This function uses mktime(...) which does not support years before 1970. </dd></
 <p>This function is similar to timey_query_date(...) but it accepts a specific custom format for the date string. The default format that is used in timey_query_date(...) is 'm-d-Y.'</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a3e21bc5fa46cad0363058ef7097bb04d">timey_query_date(char*, size_t)</a> </dd></dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -996,7 +1031,7 @@ This function assumes the current day, month, and year should be used. For past 
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -1040,7 +1075,7 @@ This function assumes the current day, month, and year should be used. For past 
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -1060,7 +1095,7 @@ This function assumes the current day, month, and year should be used. For past 
 </div><div class="memdoc">
 <p>Obtains the current raw time in seconds since the epoch and inserts the time into the given <a class="el" href="../../d6/d2b/structtimey__raw__time.html">timey_raw_time</a>. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -1085,7 +1120,7 @@ This function assumes the current day, month, and year should be used. For past 
 <p>Obtains the current time and inserts it into a string buffer.</p>
 <dl class="section note"><dt>Note</dt><dd>For the buffer to hold the full time, the buffer must have a size of at least 9 bytes. The buffer will be in the format of "hh:mm:ss." </dd></dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -1116,7 +1151,7 @@ This function assumes the current day, month, and year should be used. For past 
 <p>This function is similar to timey_query_time(...) but it accepts a specific custom format for the time string. The default format that is used in timey_query_time(...) is 'H:M:S.'</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#ac8d41a3062b3f035a8147c130ee998e4">timey_query_time(char*, size_t)</a> </dd></dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -1138,7 +1173,7 @@ This function assumes the current day, month, and year should be used. For past 
 <p>Resetting a stopwatch results in its elapsed seconds being reset to 0, and its 'start_time' timestamp being reset as well.</p>
 <dl class="section note"><dt>Note</dt><dd>This function also resets the 'end_time' timestamp on the stopwatch. </dd></dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -1162,7 +1197,7 @@ This function assumes the current day, month, and year should be used. For past 
 </div><div class="memdoc">
 <p>Modifies a datetime object by changing its current day. The other fields on the datetime will automatically be updated. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -1186,7 +1221,7 @@ This function assumes the current day, month, and year should be used. For past 
 </div><div class="memdoc">
 <p>Modifies a datetime object by changing its current month. The other fields on the datetime will automatically be updated. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -1210,7 +1245,7 @@ This function assumes the current day, month, and year should be used. For past 
 </div><div class="memdoc">
 <p>Modifies a datetime object by changing its current year. The other fields on the datetime will automatically be updated. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -1230,7 +1265,7 @@ This function assumes the current day, month, and year should be used. For past 
 </div><div class="memdoc">
 <p>Starts a stopwatch. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -1254,7 +1289,7 @@ This function assumes the current day, month, and year should be used. For past 
 </div><div class="memdoc">
 <p>Determines if two timestamps are equal. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -1280,7 +1315,7 @@ This function assumes the current day, month, and year should be used. For past 
 <p>Use this function in the program's main loop using the delta time value to update the stopwatch's time.</p>
 <dl class="section note"><dt>Note</dt><dd>If the stopwatch is using a target end time, this function automatically checks to see if the end time has been reached, and if it has, the stopwatch is paused, and the 'end_time_reached' field on the stopwatch will be true. </dd></dl>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>
@@ -1311,7 +1346,7 @@ This function assumes the current day, month, and year should be used. For past 
 <p>Use this function in the program's main loop using the delta time value to update the timer.</p>
 <p>The 3rd argument to this function should be the same argument that should be passed into the timer's action function, if it has one. </p>
 
-<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00210">TIMEY_API</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/d05/timey_8h_source.html#l00215">TIMEY_API</a>.</p>
 
 </div>
 </div>

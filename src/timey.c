@@ -440,9 +440,11 @@ timey_datetime timey_curr_datetime()
 	dt.day = strtoul(day, NULL, 10);
 	set_curr_day_name_dt(&dt);
 	dt.is_leap_year = timey_is_leap_year(dt.year);
+	dt.is_dst_active = timey_is_dst_active(dt.year, dt.month, dt.day, dt.time.hour24);
 
 	return dt;
 }
+
 static void goto_next_year(timey_datetime *dt)
 {
 	dt->month -= 12;
@@ -678,6 +680,24 @@ bool timey_is_leap_year(unsigned long long year)
 	   the year is a multiple of 4 and not a multiple of 100.
 	*/
 	return (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0);
+}
+bool timey_is_dst_active(unsigned long long year, unsigned long long month, unsigned long long day, unsigned long long hour)
+{
+	// use mktime(...) function to obtain dst status
+	struct tm time_result = {0};
+
+	time_result.tm_year = year - 1900;
+	time_result.tm_mon = month - 1;
+	time_result.tm_mday = day;
+	time_result.tm_hour = hour;
+
+	if(mktime(&time_result) == -1)
+		return false;
+
+	if(time_result.tm_isdst > 0)
+		return true;
+	else
+		return false;
 }
 static const unsigned char DAY_NUMS[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 unsigned char timey_num_days_in_month(unsigned char month)
